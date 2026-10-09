@@ -12,11 +12,11 @@
 Дизайн и фирменные цвета: этап 3, после правок по прототипу.
 
 БЛОКЕРЫ КЛИЕНТА (плейсхолдеры в тексте):
-- [НОМЕР]: основной телефон (903 или 961, в Яндексе и 2ГИС разные)
-- [ОТВЕТСТВЕННЫЙ]: кто отвечает на сообщения с сайта (в текстах срок ответа не обещаем)
-- [ЗАЛ 1] / [ЗАЛ 2]: названия двух залов (места 53 и 40 на БМБ)
 - [СРОК АКЦИИ]: срок действия акции
 - [РЕКВИЗИТЫ]: реквизиты организации для подвала
+- Залы: «Фирменный отдел Корона» (место 53) и «Отдел нескольких фабрик» (место 40):
+  рабочая гипотеза, проверить у Виктора, какое место к какому отделу
+- на сообщения в MAX отвечает Захар (видно из переписки), ждём подтверждения от Виктора
 Также до запуска: подтверждение рассрочки (три платежа заявлены в ВК и Яндексе),
 занос без грузового лифта, уведомление РКН.
 
@@ -288,8 +288,8 @@ footer.block{margin-bottom:0}
       </div>
     </div>
     <div class="hdr-actions">
-      <a class="hdr-phone" href="tel:+7[НОМЕР]" data-mark="hdr_call">+7 [НОМЕР]</a>
-      <a class="btn fill" href="#" data-mark="hdr_max">Написать в MAX</a>
+      <a class="hdr-phone" href="tel:+79033980560" data-mark="hdr_call">+7 (903) 398-05-60</a>
+      <a class="btn fill" href="https://max.ru/u/f9LHodD0cOJCXonOE7L-6d2Cn6Nf_J-C3UZZcRvgBYKgweEdzWz5XIKUxtk" data-mark="hdr_max" target="_blank" rel="noopener">Написать в MAX</a>
     </div>
   </div>
 </div>
@@ -307,11 +307,13 @@ footer.block{margin-bottom:0}
 
   <p>
     г. Оренбург, Терешковой 281/3, Большой мебельный базар<br>
-    Зал [ЗАЛ 1], место 53 · Зал [ЗАЛ 2], место 40<br>
-    Ежедневно 10:00–20:00
+    Зал «Фирменный отдел Корона», место 53 · Зал «Отдел нескольких фабрик», место 40<br>
+  <!-- проверить у Виктора: какое место (53 или 40) к какому отделу, привязка пока гипотеза -->
+    Ежедневно 10:00-20:00, без перерывов и выходных
   </p>
 
-  <div class="note">Подача как один магазин с двумя залами в одном ТЦ: [ЗАЛ 1]: эконом, [ЗАЛ 2]: дороже. Названия залов ждём от клиента.</div>
+  <div class="note">Подача как один магазин с двумя залами в одном ТЦ: «Фирменный отдел Корона» (эконом, место 53), «Отдел нескольких фабрик» (дороже, место 40).
+  <!-- проверить у Виктора: какое место (53 или 40) к какому отделу, привязка пока гипотеза --></div>
 
   <ul class="clean">
     <li><strong>4,8 на Яндекс.Картах</strong> из 63 оценок</li>
@@ -320,11 +322,12 @@ footer.block{margin-bottom:0}
   </ul>
 
   <p style="margin-top:14px">
-    <a class="btn fill" href="#" data-mark="hero_max">Написать в MAX</a>
-    <a class="btn" href="tel:+7[НОМЕР]" data-mark="hero_call">Позвонить: +7 [НОМЕР]</a>
+    <a class="btn fill" href="https://max.ru/u/f9LHodD0cOJCXonOE7L-6d2Cn6Nf_J-C3UZZcRvgBYKgweEdzWz5XIKUxtk" data-mark="hero_max" target="_blank" rel="noopener">Написать в MAX</a>
+    <a class="btn" href="tel:+79033980560" data-mark="hero_call">Позвонить: +7 (903) 398-05-60</a>
   </p>
-  <p class="small">Телефон кликабельный. Отвечает [ОТВЕТСТВЕННЫЙ]. В текстах срок ответа не обещаем.</p>
-  <p class="small">[РЕШЕНИЕ] Кнопка «Написать в MAX»: заглушка-ссылка, на сборке подставится deeplink в чат магазина. WhatsApp как запасной канал: там, где текст подставляется автоматически.</p>
+  <p class="small">Телефон кликабельный. В текстах срок ответа не обещаем.
+  <!-- на сообщения в MAX отвечает Захар (видно из переписки), ждём подтверждения от Виктора --></p>
+  <p class="small">[РЕШЕНИЕ] Кнопки «Написать в MAX» ведут в чат магазина в max.ru. WhatsApp как запасной канал: там, где текст подставляется автоматически.</p>
 
   <div class="mobile-only" style="margin-top:14px;border-top:1px solid var(--line);padding-top:14px">
     <p><strong>Проще телефон?</strong> Оставьте номер, перезвоним.</p>
@@ -401,7 +404,7 @@ footer.block{margin-bottom:0}
     <p class="note">Точную жёсткость подбирают в зале: по росту и весу подбираем нагрузку на пружинный блок, потом вы ложитесь на матрас и проверяете. Код подбора сохраняет ваши ответы.</p>
 
     <p style="margin-top:14px">
-      <a class="btn fill" href="#" id="quizMaxBtn" data-mark="quiz_max">Написать в MAX</a>
+      <a class="btn fill" href="https://max.ru/u/f9LHodD0cOJCXonOE7L-6d2Cn6Nf_J-C3UZZcRvgBYKgweEdzWz5XIKUxtk" id="quizMaxBtn" data-mark="quiz_max" target="_blank" rel="noopener">Написать в MAX</a>
       <a class="btn" href="#" id="quizWaBtn" data-mark="quiz_wa" target="_blank" rel="noopener">Написать в WhatsApp</a>
     </p>
     <p class="small">Откроется чат с магазином, ваш подбор уже внутри сообщения.</p>
@@ -698,7 +701,7 @@ footer.block{margin-bottom:0}
   <details>
     <summary>Можно приехать и просто полежать?</summary>
     <div class="faq-body">
-      <p>Да, для этого и существует зал. Приходите в рабочие часы 10:00-20:00, скажите рост и вес, продавец предложит 2-3 матраса. Полежать можно сколько угодно, покупать сразу не обязательны.</p>
+      <p>Да, для этого и существует зал. Приходите в рабочие часы 10:00-20:00, без перерывов и выходных, скажите рост и вес, продавец предложит 2-3 матраса. Полежать можно сколько угодно, покупать сразу не обязательны.</p>
     </div>
   </details>
   <details>
@@ -715,13 +718,13 @@ footer.block{margin-bottom:0}
 <section class="block" id="location">
   <span class="block-tag">Блок 12. Как нас найти</span>
   <h2>Как нас найти</h2>
-  <p>Оренбург, Терешковой 281/3, Большой мебельный базар. Зал [ЗАЛ 1], место 53, зал [ЗАЛ 2], место 40. Работаем 10:00-20:00.</p>
+  <p>Оренбург, Терешковой 281/3, Большой мебельный базар. Зал «Фирменный отдел Корона», место 53, зал «Отдел нескольких фабрик», место 40. Работаем 10:00-20:00, без перерывов и выходных.</p>
 
   <div class="ph" style="min-height:240px;margin:12px 0">[интерактивная карта: Яндекс.Карты, одна метка на ТЦ] Подгружается лениво.</div>
 
   <div class="grid c2">
-    <div class="ph" style="min-height:160px">[фото: путь до места 53, зал [ЗАЛ 1]. Снимется на фотосессии: вход, поворот, дверь]</div>
-    <div class="ph" style="min-height:160px">[фото: путь до места 40, зал [ЗАЛ 2]. Снимется на фотосессии]</div>
+    <div class="ph" style="min-height:160px">[фото: путь до места 53, зал «Фирменный отдел Корона». Снимется на фотосессии: вход, поворот, дверь]</div>
+    <div class="ph" style="min-height:160px">[фото: путь до места 40, зал «Отдел нескольких фабрик». Снимется на фотосессии]</div>
   </div>
 
   <p style="margin-top:14px">
@@ -755,7 +758,7 @@ footer.block{margin-bottom:0}
   </form>
 
   <p style="margin-top:14px">
-    <a class="btn" href="#" data-mark="final_max">Написать в MAX</a>
+    <a class="btn" href="https://max.ru/u/f9LHodD0cOJCXonOE7L-6d2Cn6Nf_J-C3UZZcRvgBYKgweEdzWz5XIKUxtk" data-mark="final_max" target="_blank" rel="noopener">Написать в MAX</a>
     <a class="btn" href="#" data-mark="final_wa" target="_blank" rel="noopener">Написать в WhatsApp</a>
   </p>
 </section>
@@ -766,8 +769,8 @@ footer.block{margin-bottom:0}
 <footer class="block" id="footer">
   <span class="block-tag">Блок 14. Подвал</span>
   <p><strong>Матрасы Корона на БМБ</strong><br>
-  Оренбург, Терешковой 281/3, БМБ, места 53 и 40 · 10:00-20:00<br>
-  Телефон: <a href="tel:+7[НОМЕР]">+7 [НОМЕР]</a></p>
+  Оренбург, Терешковой 281/3, БМБ, места 53 и 40 · 10:00-20:00, без перерывов и выходных<br>
+  Телефон: <a href="tel:+79033980560">+7 (903) 398-05-60</a></p>
   <p class="small">[РЕКВИЗИТЫ: ИП/ООО, ИНН, ОГРН: ждём от клиента]</p>
   <p class="small"><a href="#" data-mark="footer_policy">Политика обработки персональных данных</a> [страница-заглушка, текст политики добавим на сборке, отдельным документом]</p>
   <p class="small">© 2026. Прототип сайта, этап 2 из 4. Дизайн появится на этапе 3.</p>
@@ -775,7 +778,7 @@ footer.block{margin-bottom:0}
 
 <!-- Сквозное: липкая кнопка мессенджера (мобильный) -->
 <div class="sticky-msgr">
-  <a class="btn fill" href="#" data-mark="sticky_msgr">Написать в MAX</a>
+  <a class="btn fill" href="https://max.ru/u/f9LHodD0cOJCXonOE7L-6d2Cn6Nf_J-C3UZZcRvgBYKgweEdzWz5XIKUxtk" data-mark="sticky_msgr" target="_blank" rel="noopener">Написать в MAX</a>
 </div>
 
 <script>
@@ -965,7 +968,7 @@ function renderFinal(){
     ', бюджет: ' + (quiz.answers.budget || 'нет ответа') +
     '. Хочу узнать наличие и цену.';
   document.getElementById('quizWaBtn').href =
-    'https://wa.me/7[НОМЕР]?text=' + encodeURIComponent(text);
+    'https://wa.me/79033980560?text=' + encodeURIComponent(text);
 }
 
 /* Возврат на пройденный шаг при перезагрузке */
