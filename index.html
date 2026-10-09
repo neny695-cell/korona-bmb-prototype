@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Матрасы Корона на БМБ, Оренбург. Прототип сайта, этап 2 (каркас)</title>
+<meta name="description" content="Прототип одностраничного сайта. Матрасы Корона на БМБ, Оренбург, Терешковой 281/3.">
+<!--
+=====================================================================
+ПРОТОТИП САЙТА «МАТРАСЫ КОРОНА НА БМБ»: ЭТАП 2 ИЗ 4
+Каркас без дизайна. Серые блоки, видны границы. Вёрстка mobile-first.
+Дизайн и фирменные цвета: этап 3, после правок по прототипу.
+
+БЛОКЕРЫ КЛИЕНТА (плейсхолдеры в тексте):
+- [НОМЕР]: основной телефон (903 или 961, в Яндексе и 2ГИС разные)
+- [ОТВЕТСТВЕННЫЙ]: кто отвечает на сообщения с сайта (в текстах срок ответа не обещаем)
+- [ЗАЛ 1] / [ЗАЛ 2]: названия двух залов (места 53 и 40 на БМБ)
+- [СРОК АКЦИИ]: срок действия акции
+- [РЕКВИЗИТЫ]: реквизиты организации для подвала
+Также до запуска: подтверждение рассрочки (три платежа заявлены в ВК и Яндексе),
+занос без грузового лифта, уведомление РКН.
+
+РЕШЕНИЯ ПРОЕКТИРОВЩИКА (помечены в тексте [РЕШЕНИЕ]):
+- Отзывы в блоке 9: цитаты-заглушки, помечены «пример, заменить на реальный
+  отзыв из Яндекс.Карт». Реальные цитаты не выдумываем.
+- Рекомендации квиза: простая логика по бюджету (карта в JS, объект RECO).
+  Жёсткость в логике не фильтруем, на финале всегда строка про подбор в зале.
+- Логотип на этапе прототипа текстовый, вектор запрошен у клиента.
+=====================================================================
+-->
+<style>
+/* ===== КАРКАСНЫЕ СТИЛИ (только для читаемости прототипа) ===== */
+:root{
+  --line:#9a9a9a;        /* границы блоков */
+  --bg:#f2f2f2;          /* фон страницы */
+  --block:#ffffff;       /* фон блока */
+  --dark:#2b2b2b;        /* текст и рамки акцентов */
+  --mid:#6f6f6f;         /* вторичный текст */
+  --ph:#d9d9d9;          /* плейсхолдеры (картинки, карта) */
+  --maxw:1100px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  color:var(--dark);
+  background:var(--bg);
+  line-height:1.5;
+  padding-bottom:64px; /* место под липкую кнопку на мобильном */
+}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 16px}
+
+/* Плашка-метка блока */
+.block{
+  border:2px solid var(--line);
+  background:var(--block);
+  margin:18px auto;
+  max-width:var(--maxw);
+  padding:20px 16px;
+}
+@media(min-width:768px){.block{padding:28px 32px}}
+.block-tag{
+  display:inline-block;
+  font-size:12px;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  color:#fff;
+  background:var(--mid);
+  padding:3px 10px;
+  margin-bottom:14px;
+  border-radius:2px;
+}
+h1{font-size:26px;line-height:1.2;margin:8px 0 12px}
+@media(min-width:768px){h1{font-size:40px}}
+h2{font-size:20px;line-height:1.25;margin:6px 0 14px}
+@media(min-width:768px){h2{font-size:28px}}
+h3{font-size:16px;margin:10px 0 6px}
+p{margin:6px 0}
+.lead{font-size:16px;color:var(--dark)}
+@media(min-width:768px){.lead{font-size:18px}}
+.small{font-size:13px;color:var(--mid)}
+.note{
+  border:1px dashed var(--line);
+  background:#fafafa;
+  padding:8px 12px;
+  font-size:13px;
+  color:var(--mid);
+  margin:10px 0;
+}
+a{color:var(--dark)}
+ul.clean{list-style:none}
+ul.clean li{padding:4px 0 4px 20px;position:relative}
+ul.clean li::before{content:"–";position:absolute;left:0;color:var(--mid)}
+
+/* Кнопки-каркасы: все одинаково серые, видно что кнопка */
+.btn{
+  display:inline-block;
+  border:2px solid var(--dark);
+  background:#fff;
+  color:var(--dark);
+  font-size:16px;
+  font-weight:600;
+  padding:13px 22px;
+  text-decoration:none;
+  cursor:pointer;
+  text-align:center;
+  border-radius:4px;
+  margin:6px 8px 6px 0;
+  font-family:inherit;
+}
+.btn.fill{background:var(--dark);color:#fff}
+.btn:active{transform:translateY(1px)}
+
+/* Плейсхолдеры картинок/карты */
+.ph{
+  border:1px solid var(--line);
+  background:var(--ph);
+  color:#555;
+  display:flex;align-items:center;justify-content:center;
+  text-align:center;
+  font-size:13px;
+  padding:16px;
+  min-height:120px;
+}
+
+/* Сетки */
+.grid{display:grid;grid-template-columns:1fr;gap:12px}
+@media(min-width:768px){
+  .grid.c2{grid-template-columns:1fr 1fr}
+  .grid.c3{grid-template-columns:repeat(3,1fr)}
+  .grid.c4{grid-template-columns:repeat(4,1fr)}
+}
+.card{
+  border:1px solid var(--line);
+  padding:14px;
+  background:#fff;
+  display:flex;flex-direction:column;gap:6px;
+}
+
+/* Табы витрины */
+.tabs-nav{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 16px}
+.tab-btn{
+  border:2px solid var(--line);
+  background:#fff;
+  padding:9px 14px;
+  font-size:14px;
+  font-weight:600;
+  cursor:pointer;
+  border-radius:4px;
+  font-family:inherit;
+}
+.tab-btn.active{border-color:var(--dark);background:var(--dark);color:#fff}
+.tab-pane{display:none}
+.tab-pane.active{display:block}
+.price{font-weight:700;font-size:17px}
+.sizes{font-size:13px;color:var(--mid)}
+
+/* Квиз */
+.quiz-step{display:none}
+.quiz-step.active{display:block}
+.quiz-progress{
+  font-size:13px;color:var(--mid);
+  border:1px solid var(--line);
+  display:inline-block;
+  padding:4px 12px;
+  margin-bottom:12px;
+}
+.quiz-bar{height:8px;border:1px solid var(--line);margin:8px 0 16px;background:#fff}
+.quiz-bar i{display:block;height:100%;background:var(--mid);width:0%;transition:width .25s}
+.opt{
+  display:block;
+  border:2px solid var(--line);
+  background:#fff;
+  padding:13px 16px;
+  margin:8px 0;
+  font-size:16px;
+  cursor:pointer;
+  border-radius:4px;
+  text-align:left;
+  width:100%;
+  font-family:inherit;
+}
+.opt:hover{border-color:var(--dark)}
+.field{margin:10px 0}
+.field label{display:block;font-size:14px;margin-bottom:4px}
+.field input{
+  width:100%;
+  max-width:380px;
+  padding:12px;
+  font-size:16px;
+  border:2px solid var(--line);
+  border-radius:4px;
+  font-family:inherit;
+}
+.quiz-nav{margin-top:16px}
+
+/* Блок 0. Липкая шапка */
+.hdr{
+  position:sticky;
+  top:0;
+  z-index:45;
+  background:#e8e8e8;
+  border-bottom:2px solid var(--line);
+}
+.hdr-in{
+  max-width:var(--maxw);
+  margin:0 auto;
+  padding:8px 16px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+}
+.hdr-left{display:flex;align-items:center;gap:12px;min-width:0}
+.hdr-logo{
+  border:1px solid var(--line);
+  background:var(--ph);
+  font-size:11px;
+  color:#555;
+  padding:8px 10px;
+  white-space:nowrap;
+  flex:none;
+}
+.hdr-title{font-weight:700;font-size:15px;line-height:1.2}
+.hdr-sub{font-size:12px;color:var(--mid)}
+.hdr-actions{display:flex;align-items:center;gap:12px}
+.hdr-phone{font-size:15px;font-weight:600;white-space:nowrap;text-decoration:none}
+.hdr-actions .btn{margin:0;padding:9px 16px;font-size:14px}
+@media(max-width:719px){
+  .hdr-phone{display:none}
+  .hdr-sub{display:none}
+}
+
+/* Липкая кнопка мессенджера (мобильный) */
+.mobile-only{display:block}
+@media(min-width:768px){.mobile-only{display:none}}
+.sticky-msgr{
+  position:fixed;
+  left:0;right:0;bottom:0;
+  z-index:50;
+  background:#fff;
+  border-top:2px solid var(--dark);
+  padding:10px 16px;
+  text-align:center;
+}
+.sticky-msgr .btn{margin:0;width:100%}
+@media(min-width:768px){.sticky-msgr{display:none}}
+
+/* FAQ */
+details{
+  border:1px solid var(--line);
+  margin:8px 0;
+  background:#fff;
+}
+details summary{
+  padding:13px 14px;
+  font-weight:600;
+  cursor:pointer;
+  list-style:none;
+  position:relative;
+  padding-right:36px;
+}
+details summary::after{
+  content:"+";position:absolute;right:14px;top:10px;
+  font-size:20px;color:var(--mid);
+}
+details[open] summary::after{content:"–"}
+details .faq-body{padding:0 14px 14px}
+
+/* Финальная форма */
+.final-form .field input{max-width:100%}
+footer.block{margin-bottom:0}
+</style>
+</head>
+<body>
+
+<!-- ================================================================
+     БЛОК 0. ШАПКА (ЛИПКАЯ)
+================================================================= -->
+<div class="hdr">
+  <span class="block-tag" style="margin:4px 0 0 16px;display:inline-block">Блок 0. Шапка (липкая)</span>
+  <div class="hdr-in">
+    <div class="hdr-left">
+      <div class="hdr-logo">[ЛОГОТИП вектор]</div>
+      <div>
+        <div class="hdr-title">Матрасы Корона на БМБ</div>
+        <div class="hdr-sub">Оренбург, Терешковой 281/3, места 53 и 40</div>
+      </div>
+    </div>
+    <div class="hdr-actions">
+      <a class="hdr-phone" href="tel:+7[НОМЕР]" data-mark="hdr_call">+7 [НОМЕР]</a>
+      <a class="btn fill" href="#" data-mark="hdr_max">Написать в MAX</a>
+    </div>
+  </div>
+</div>
+
+<!-- ================================================================
+     БЛОК 1. ПЕРВЫЙ ЭКРАН
+================================================================= -->
+<header class="block" id="top">
+  <span class="block-tag">Блок 1. Первый экран</span>
+
+  <p class="small">[место под логотип фабрики в векторе, запрошен у клиента]</p>
+
+  <h1>Матрасы Корона на БМБ</h1>
+  <p class="lead">Фирменный магазин фабрики «Корона». Подбираем матрас под рост и вес, называем цену сразу.</p>
+
+  <p>
+    г. Оренбург, Терешковой 281/3, Большой мебельный базар<br>
+    Зал [ЗАЛ 1], место 53 · Зал [ЗАЛ 2], место 40<br>
+    Ежедневно 10:00–20:00
+  </p>
+
+  <div class="note">Подача как один магазин с двумя залами в одном ТЦ: [ЗАЛ 1]: эконом, [ЗАЛ 2]: дороже. Названия залов ждём от клиента.</div>
+
+  <ul class="clean">
+    <li><strong>4,8 на Яндекс.Картах</strong> из 63 оценок</li>
+    <li><strong>8 лет в Оренбурге</strong> на одном месте</li>
+    <li><strong>Фирменный магазин фабрики</strong> «Корона», топ-3 в России</li>
+  </ul>
+
+  <p style="margin-top:14px">
+    <a class="btn fill" href="#" data-mark="hero_max">Написать в MAX</a>
+    <a class="btn" href="tel:+7[НОМЕР]" data-mark="hero_call">Позвонить: +7 [НОМЕР]</a>
+  </p>
+  <p class="small">Телефон кликабельный. Отвечает [ОТВЕТСТВЕННЫЙ]. В текстах срок ответа не обещаем.</p>
+  <p class="small">[РЕШЕНИЕ] Кнопка «Написать в MAX»: заглушка-ссылка, на сборке подставится deeplink в чат магазина. WhatsApp как запасной канал: там, где текст подставляется автоматически.</p>
+
+  <div class="mobile-only" style="margin-top:14px;border-top:1px solid var(--line);padding-top:14px">
+    <p><strong>Проще телефон?</strong> Оставьте номер, перезвоним.</p>
+    <div class="field">
+      <input type="tel" id="heroPhone" placeholder="+7 ___ ___-__-__">
+    </div>
+    <button class="btn" id="heroPhoneSubmit">Перезвоните мне</button>
+    <p class="small" id="heroPhoneMsg"></p>
+  </div>
+</header>
+
+<!-- ================================================================
+     БЛОК 2. КВИЗ
+================================================================= -->
+<section class="block" id="quiz">
+  <span class="block-tag">Блок 2. Квиз «Подберём матрас за 10 минут»</span>
+
+  <h2>Подберём матрас за 10 минут</h2>
+  <p>Ответьте на 4 вопроса, получите код подбора и 2-3 модели из наличия. Назовёте код продавцу в зале, продолжим с того же места.</p>
+
+  <div class="quiz-progress" id="quizProgress">Шаг 1 из 4</div>
+  <div class="quiz-bar"><i id="quizBar"></i></div>
+
+  <!-- Шаг 1 -->
+  <div class="quiz-step active" data-step="1">
+    <h3>Кто будет спать на матрасе?</h3>
+    <button class="opt" data-q="who" data-v="Один">Один</button>
+    <button class="opt" data-q="who" data-v="Вдвоём">Вдвоём</button>
+    <button class="opt" data-q="who" data-v="С ребёнком">С ребёнком</button>
+  </div>
+
+  <!-- Шаг 2 -->
+  <div class="quiz-step" data-step="2">
+    <h3>Рост и вес спящего</h3>
+    <p class="small">Если спите вдвоём, укажите данные того, кому нужна более жёсткая сторона.</p>
+    <div class="field">
+      <label for="qHeight">Рост, см</label>
+      <input type="number" id="qHeight" inputmode="numeric" min="100" max="230" placeholder="например, 175">
+    </div>
+    <div class="field">
+      <label for="qWeight">Вес, кг</label>
+      <input type="number" id="qWeight" inputmode="numeric" min="20" max="250" placeholder="например, 85">
+    </div>
+    <p class="small">Нужно для подбора жёсткости. Данные никуда не уходят, видит только продавец.</p>
+    <div class="quiz-nav">
+      <button class="btn" id="step2Next">Дальше</button>
+      <button class="btn" id="step2Skip">Не хочу указывать</button>
+    </div>
+  </div>
+
+  <!-- Шаг 3 -->
+  <div class="quiz-step" data-step="3">
+    <h3>Какая жёсткость привычна?</h3>
+    <button class="opt" data-q="firm" data-v="Мягкий">Мягкий</button>
+    <button class="opt" data-q="firm" data-v="Средний">Средний</button>
+    <button class="opt" data-q="firm" data-v="Жёсткий">Жёсткий</button>
+    <button class="opt" data-q="firm" data-v="Не знаю">Не знаю</button>
+  </div>
+
+  <!-- Шаг 4 -->
+  <div class="quiz-step" data-step="4">
+    <h3>Бюджет на матрас</h3>
+    <button class="opt" data-q="budget" data-v="До 20 тыс">До 20 тыс ₽</button>
+    <button class="opt" data-q="budget" data-v="20-35 тыс">20-35 тыс ₽</button>
+    <button class="opt" data-q="budget" data-v="35-50 тыс">35-50 тыс ₽</button>
+    <button class="opt" data-q="budget" data-v="Дороже 50 тыс">Дороже 50 тыс ₽</button>
+    <button class="opt" data-q="budget" data-v="Не важно">Бюджет не важен</button>
+  </div>
+
+  <!-- Финал -->
+  <div class="quiz-step" data-step="5">
+    <h3>Готово. Ваши варианты:</h3>
+    <div class="grid c3" id="recoList" style="margin:12px 0"></div>
+    <p class="note">Точную жёсткость подбирают в зале: по росту и весу подбираем нагрузку на пружинный блок, потом вы ложитесь на матрас и проверяете. Код подбора сохраняет ваши ответы.</p>
+
+    <p style="margin-top:14px">
+      <a class="btn fill" href="#" id="quizMaxBtn" data-mark="quiz_max">Написать в MAX</a>
+      <a class="btn" href="#" id="quizWaBtn" data-mark="quiz_wa" target="_blank" rel="noopener">Написать в WhatsApp</a>
+    </p>
+    <p class="small">Откроется чат с магазином, ваш подбор уже внутри сообщения.</p>
+
+    <p><strong>Ваш код подбора: <span id="quizCode" style="font-size:20px">получается</span></strong>. Назовёте код в чате или в зале: не нужно заново рассказывать про рост, вес и жёсткость, продавец сразу видит ваш подбор.</p>
+
+    <div class="note" style="margin-top:12px">
+      <strong>Что дальше:</strong>
+      <ul class="clean" style="margin-top:6px">
+        <li>Пишете в чат прямо с этой страницы.</li>
+        <li>Отвечает продавец, по коду видит ваши ответы.</li>
+        <li>Приходите полежать в зале, покупать не обязательны.</li>
+      </ul>
+    </div>
+
+    <div class="field" style="margin-top:16px">
+      <label for="cbName">Имя</label>
+      <input type="text" id="cbName" placeholder="Как к вам обращаться">
+    </div>
+    <div class="field">
+      <label for="cbPhone">Телефон</label>
+      <input type="tel" id="cbPhone" placeholder="+7 ___ ___-__-__">
+    </div>
+    <button class="btn" id="cbSubmit">Перезвоните мне</button>
+    <p class="small" id="cbMsg"></p>
+  </div>
+</section>
+
+<!-- ================================================================
+     БЛОК 3. ПОЧЕМУ ЗДЕСЬ
+================================================================= -->
+<section class="block" id="why">
+  <span class="block-tag">Блок 3. Почему здесь, а не у другого дилера</span>
+  <h2>Почему покупают здесь</h2>
+  <div class="grid c3">
+    <div class="card">
+      <h3>Рекламации меньше 1%</h3>
+      <p>Из тысячи проданных матрасов бракуют меньше десяти. Если что-то пошло не так, решаем на месте, без «ждите ответа от фабрики».</p>
+    </div>
+    <div class="card">
+      <h3>Открытый состав</h3>
+      <p>Публикуем, что внутри каждого матраса: слои, плотность, наполнители. Конкуренты так не делают.</p>
+    </div>
+    <div class="card">
+      <h3>Продавцы со стажем от 3 лет</h3>
+      <p>Каждый год проходят обучение прямо на фабрике «Корона». Подбирают по росту, весу и привычкам, а не «вот этот хороший».</p>
+    </div>
+    <div class="card">
+      <h3>Цена зафиксирована договором</h3>
+      <p>Внесли предоплату: цена записана в договоре и не вырастет к моменту доставки.</p>
+    </div>
+    <div class="card">
+      <h3>Гарантия 18 месяцев</h3>
+      <p>Официальная гарантия фабрики. Работаем с гарантийными случаями сами, вы не остаетесь один на один с фабрикой.</p>
+    </div>
+    <div class="card">
+      <h3>Вопросы решаются на месте</h3>
+      <p>Продавец, доставка и решение по гарантии: в одной точке. Не нужно звонить в колл-центр в другом городе.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================
+     БЛОК 4. ВИТРИНА В ТАБАХ
+================================================================= -->
+<section class="block" id="catalog">
+  <span class="block-tag">Блок 4. Витрина: ассортимент и цены</span>
+  <h2>Ассортимент и цены</h2>
+  <p class="small">Цены «от», не ниже РРЦ фабрики. Ходовой размер 160×200, также 80×200, 90×200, 120×200, 140×200, 180×200. Точную цену по размеру назовём в переписке или в зале.</p>
+
+  <div class="tabs-nav" role="tablist">
+    <button class="tab-btn active" data-tab="beds">Кровати «Корона»</button>
+    <button class="tab-btn" data-tab="mattresses">Матрасы «Корона»</button>
+    <button class="tab-btn" data-tab="gzmi">Металлические кровати ГЗМИ</button>
+    <button class="tab-btn" data-tab="tsar">Матрасы «Царские перины»</button>
+  </div>
+
+  <div class="tab-pane active" data-pane="beds">
+    <div class="grid c3" data-products="beds"></div>
+  </div>
+  <div class="tab-pane" data-pane="mattresses">
+    <div class="grid c3" data-products="mattresses"></div>
+  </div>
+  <div class="tab-pane" data-pane="gzmi">
+    <div class="grid c3" data-products="gzmi"></div>
+  </div>
+  <div class="tab-pane" data-pane="tsar">
+    <div class="grid c3" data-products="tsar"></div>
+  </div>
+</section>
+
+<!-- ================================================================
+     БЛОК 5. АКЦИИ
+================================================================= -->
+<section class="block" id="promo">
+  <span class="block-tag">Блок 5. Акции</span>
+  <h2>Комплект выгоднее</h2>
+  <div class="grid c2">
+    <div class="card">
+      <h3>Комплект: кровать + матрас «Тиффани»</h3>
+      <p class="price">от 27 000 ₽</p>
+      <p>Кровать и матрас берут вместе, поэтому цена комплекта ниже, чем по отдельности.</p>
+      <a class="btn" href="#" data-mark="promo_tiffany" data-model="Комплект Тиффани">Узнать наличие</a>
+    </div>
+    <div class="card">
+      <h3>Комплект: кровать + матрас «Велла»</h3>
+      <p class="price">от 27 000 ₽</p>
+      <p>Второй комплект по акции. Подойдёт спальне и детской.</p>
+      <a class="btn" href="#" data-mark="promo_vella" data-model="Комплект Велла">Узнать наличие</a>
+    </div>
+  </div>
+  <p class="note">Акция действует до [СРОК АКЦИИ]. В админке срок задаётся датой, после неё блок скрывается сам.</p>
+</section>
+
+<!-- ================================================================
+     БЛОК 6. ОТКРЫТЫЙ СОСТАВ
+================================================================= -->
+<section class="block" id="inside">
+  <span class="block-tag">Блок 6. Открытый состав</span>
+  <h2>Что внутри матраса, мы показываем</h2>
+
+  <div class="grid c2">
+    <div>
+      <div class="ph" style="min-height:260px">[фото: разрез матраса, снимется на фотосессии]</div>
+      <p class="small" style="margin-top:8px">Подписи к слоям появятся после фотосессии. Ниже типовой состав модели «Фаворит».</p>
+    </div>
+    <div>
+      <ul class="clean">
+        <li><strong>Чехол:</strong> жаккард, стёганный на синтепоне, съёмный на молнии</li>
+        <li><strong>Комфортный слой:</strong> натуральный латекс, 3 см, плотность 65 кг/м³</li>
+        <li><strong>Ортопедический слой:</strong> кокосовая койра, 1 см, плотность 1200 г/м²</li>
+        <li><strong>Несущий слой:</strong> ППУ повышенной плотности, 25 кг/м³</li>
+        <li><strong>Пружинный блок:</strong> независимые пружины, 256 шт на м²</li>
+      </ul>
+      <p class="note">[РЕШЕНИЕ] Плотности указаны для примера верстки, перед дизайном сверить с паспортами моделей. Названия слоёв и плотности подтянутся из админки.</p>
+    </div>
+  </div>
+
+  <p style="margin-top:14px">Маркетплейсы продают матрас по картинке. У дилера по соседству состав тоже не спросите. Мы публикуем состав открыто, потому что он нас не стыдит: наполнители фабричные, плотности честные. Это аргумент, который конкуренты не копируют.</p>
+</section>
+
+<!-- ================================================================
+     БЛОК 7. КАК ПОДБИРАЕМ
+================================================================= -->
+<section class="block" id="how">
+  <span class="block-tag">Блок 7. Как подбираем</span>
+  <h2>Как подбираем матрас</h2>
+  <div class="grid c4">
+    <div class="card">
+      <p class="small">Шаг 1</p>
+      <h3>Рост и вес</h3>
+      <p>Говорите рост и вес каждого, кто будет спать. По ним считаем нагрузку на пружинный блок.</p>
+    </div>
+    <div class="card">
+      <p class="small">Шаг 2</p>
+      <h3>Жёсткость</h3>
+      <p>Спите на чём привыкли? По ответу сужаем выбор до 2-3 моделей.</p>
+    </div>
+    <div class="card">
+      <p class="small">Шаг 3</p>
+      <h3>Ложитесь в зале</h3>
+      <p>На каждом матрасе полежите 2-3 минуты. Жёсткость проверяется спиной, а не глазами.</p>
+    </div>
+    <div class="card">
+      <p class="small">Шаг 4</p>
+      <h3>Доставка и занос</h3>
+      <p>Договариваемся о дате, привозим, заносим в квартиру и ставим на место.</p>
+    </div>
+  </div>
+  <p style="margin-top:14px"><a class="btn fill" href="#quiz" data-mark="how_quiz">Пройти подбор в квизе</a></p>
+</section>
+
+<!-- ================================================================
+     БЛОК 8. ДОСТАВКА, ОПЛАТА, ГАРАНТИЯ
+================================================================= -->
+<section class="block" id="delivery">
+  <span class="block-tag">Блок 8. Доставка, оплата, гарантия</span>
+  <h2>Доставка, оплата, гарантия</h2>
+  <div class="grid c3">
+    <div class="card">
+      <h3>Доставка</h3>
+      <ul class="clean">
+        <li>По Оренбургу: 1 500 ₽</li>
+        <li>Занос в квартиру: 1 100 ₽</li>
+        <li>Габаритные модели (большие шкафы, нестандарт) считаем отдельно, цена зависит от подъезда и лифта</li>
+      </ul>
+      <p class="small">Сценарий «без грузового лифта» уточняем у клиента до запуска.</p>
+    </div>
+    <div class="card">
+      <h3>Оплата</h3>
+      <ul class="clean">
+        <li>Наличные, карта, перевод: как удобно</li>
+        <li>Рассрочка [уточнить условия: три платежа заявлены в ВК и Яндексе, ждём подтверждения]</li>
+        <li>Предоплата фиксирует цену в договоре</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Гарантия</h3>
+      <ul class="clean">
+        <li>18 месяцев официальной гарантии фабрики</li>
+        <li>Рекламации меньше 1%, спорные случаи решаем на месте</li>
+        <li>Договор и чек выдаём при покупке</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================
+     БЛОК 9. ОТЗЫВЫ
+================================================================= -->
+<section class="block" id="reviews">
+  <span class="block-tag">Блок 9. Отзывы</span>
+  <h2>Что пишут покупатели</h2>
+
+  <div class="grid c3">
+    <div class="card">
+      <p>«Пример цитаты. Заменить на реальный отзыв из Яндекс.Карт.»</p>
+      <p class="small">[Имя], [дата]</p>
+    </div>
+    <div class="card">
+      <p>«Пример цитаты. Заменить на реальный отзыв из Яндекс.Карт.»</p>
+      <p class="small">[Имя], [дата]</p>
+    </div>
+    <div class="card">
+      <p>«Пример цитаты. Заменить на реальный отзыв из Яндекс.Карт.»</p>
+      <p class="small">[Имя], [дата]</p>
+    </div>
+    <div class="card">
+      <p>«Пример цитаты. Заменить на реальный отзыв из Яндекс.Карт.»</p>
+      <p class="small">[Имя], [дата]</p>
+    </div>
+  </div>
+  <p class="note">[РЕШЕНИЕ] Реальные отзывы не выдумываем. На сборке сюда переносим 3-4 короткие цитаты из Яндекс.Карт (29 отзывов, рейтинг 4,8) через админку.</p>
+
+  <div class="ph" style="min-height:200px;margin-top:12px">[виджет Яндекс.Карт с отзывами] Подгружается лениво: только когда блок попадает в экран, чтобы не тормозить загрузку страницы.</div>
+</section>
+
+<!-- ================================================================
+     БЛОК 10. КОМАНДА
+================================================================= -->
+<section class="block" id="team">
+  <span class="block-tag">Блок 10. Команда</span>
+  <h2>Кто встретит вас в зале</h2>
+  <div class="grid c4">
+    <div class="card">
+      <div class="ph" style="min-height:140px">[фото: Захар]</div>
+      <h3>Захар</h3>
+      <p>Продавец. Стаж в матрасах более 3 лет, обучение на фабрике «Корона».</p>
+    </div>
+    <div class="card">
+      <div class="ph" style="min-height:140px">[фото: Елена]</div>
+      <h3>Елена</h3>
+      <p>Продавец. Стаж более 3 лет, обучение на фабрике «Корона».</p>
+    </div>
+    <div class="card">
+      <div class="ph" style="min-height:140px">[фото: Неля]</div>
+      <h3>Неля</h3>
+      <p>Ведёт группу ВКонтакте, отвечает на вопросы в переписке.</p>
+    </div>
+    <div class="card">
+      <div class="ph" style="min-height:140px">[фото: Мария]</div>
+      <h3>Мария</h3>
+      <p>Соцсети и фото. Фотосессия залов: её работа.</p>
+    </div>
+  </div>
+  <p class="small">Стаж каждого продавца уточним с Виктором и впишем точные годы. Люди реальные, это не стоковые лица.</p>
+</section>
+
+<!-- ================================================================
+     БЛОК 11. FAQ
+================================================================= -->
+<section class="block" id="faq">
+  <span class="block-tag">Блок 11. Частые вопросы</span>
+  <h2>Частые вопросы</h2>
+
+  <details>
+    <summary>Пружинный матрас или беспружинный?</summary>
+    <div class="faq-body">
+      <p>Пружинный лучше держит спину при весе от 80 кг и подходит, если спите вдвоём: независимые пружины не передают движение партнёру. Беспружинный мягче и легче, хорош для детей и небольшого веса. По росту и весу скажем точнее.</p>
+    </div>
+  </details>
+  <details>
+    <summary>Можно ли заказать нестандартный размер?</summary>
+    <div class="faq-body">
+      <p>Да, фабрика шьёт нестандарт. Сроки и цену по вашему размеру назовём в переписке или в зале, обычно это плюс одна-две недели к сроку.</p>
+    </div>
+  </details>
+  <details>
+    <summary>Сколько ждать матрас, которого нет в наличии?</summary>
+    <div class="faq-body">
+      <p>Ходовые модели и размеры (например, 160×200) обычно на складе фабрики в Оренбурге и приезжают быстро. Редкие модели и нестандарт под заказ приезжают дольше, точный срок назовём до оплаты и запишем в договор.</p>
+    </div>
+  </details>
+  <details>
+    <summary>Можно приехать и просто полежать?</summary>
+    <div class="faq-body">
+      <p>Да, для этого и существует зал. Приходите в рабочие часы 10:00-20:00, скажите рост и вес, продавец предложит 2-3 матраса. Полежать можно сколько угодно, покупать сразу не обязательны.</p>
+    </div>
+  </details>
+  <details>
+    <summary>Что делать, если матрас не подошёл?</summary>
+    <div class="faq-body">
+      <p>Сначала пишите нам или приходите в зал. Вместе смотрим, в чём проблема: иногда решается сменой основания или наматрасника. Если это гарантийный случай, меняем или ремонтируем по договору. Гарантия 18 месяцев.</p>
+    </div>
+  </details>
+</section>
+
+<!-- ================================================================
+     БЛОК 12. КАК НАЙТИ
+================================================================= -->
+<section class="block" id="location">
+  <span class="block-tag">Блок 12. Как нас найти</span>
+  <h2>Как нас найти</h2>
+  <p>Оренбург, Терешковой 281/3, Большой мебельный базар. Зал [ЗАЛ 1], место 53, зал [ЗАЛ 2], место 40. Работаем 10:00-20:00.</p>
+
+  <div class="ph" style="min-height:240px;margin:12px 0">[интерактивная карта: Яндекс.Карты, одна метка на ТЦ] Подгружается лениво.</div>
+
+  <div class="grid c2">
+    <div class="ph" style="min-height:160px">[фото: путь до места 53, зал [ЗАЛ 1]. Снимется на фотосессии: вход, поворот, дверь]</div>
+    <div class="ph" style="min-height:160px">[фото: путь до места 40, зал [ЗАЛ 2]. Снимется на фотосессии]</div>
+  </div>
+
+  <p style="margin-top:14px">
+    <a class="btn" href="#" data-mark="route_yamaps" target="_blank" rel="noopener">Маршрут в Яндекс Картах</a>
+    <a class="btn" href="#" data-mark="route_2gis" target="_blank" rel="noopener">Маршрут в 2ГИС</a>
+  </p>
+  <p class="small">[РЕШЕНИЕ] Ссылки на маршрут соберём на сборке: одна точка на ТЦ, две подписи залов внутри. Заглушки, чтобы не вести людей на неверную метку.</p>
+</section>
+
+<!-- ================================================================
+     БЛОК 13. ФИНАЛЬНЫЙ ЭКРАН
+================================================================= -->
+<section class="block" id="final">
+  <span class="block-tag">Блок 13. Финальный экран</span>
+  <h2>Остался один шаг: напишите нам</h2>
+  <p>Напишите в мессенджер: подберём модель под ваш рост и вес, скажем цену и наличие. Или оставьте телефон, перезвоним.</p>
+
+  <form class="final-form" id="finalForm" novalidate>
+    <div class="grid c2">
+      <div class="field">
+        <label for="fName">Имя</label>
+        <input type="text" id="fName" placeholder="Как к вам обращаться" required>
+      </div>
+      <div class="field">
+        <label for="fPhone">Телефон</label>
+        <input type="tel" id="fPhone" placeholder="+7 ___ ___-__-__" required>
+      </div>
+    </div>
+    <button class="btn fill" type="submit" data-mark="final_form">Перезвоните мне</button>
+    <p class="small" id="finalMsg"></p>
+  </form>
+
+  <p style="margin-top:14px">
+    <a class="btn" href="#" data-mark="final_max">Написать в MAX</a>
+    <a class="btn" href="#" data-mark="final_wa" target="_blank" rel="noopener">Написать в WhatsApp</a>
+  </p>
+</section>
+
+<!-- ================================================================
+     БЛОК 14. ПОДВАЛ
+================================================================= -->
+<footer class="block" id="footer">
+  <span class="block-tag">Блок 14. Подвал</span>
+  <p><strong>Матрасы Корона на БМБ</strong><br>
+  Оренбург, Терешковой 281/3, БМБ, места 53 и 40 · 10:00-20:00<br>
+  Телефон: <a href="tel:+7[НОМЕР]">+7 [НОМЕР]</a></p>
+  <p class="small">[РЕКВИЗИТЫ: ИП/ООО, ИНН, ОГРН: ждём от клиента]</p>
+  <p class="small"><a href="#" data-mark="footer_policy">Политика обработки персональных данных</a> [страница-заглушка, текст политики добавим на сборке, отдельным документом]</p>
+  <p class="small">© 2026. Прототип сайта, этап 2 из 4. Дизайн появится на этапе 3.</p>
+</footer>
+
+<!-- Сквозное: липкая кнопка мессенджера (мобильный) -->
+<div class="sticky-msgr">
+  <a class="btn fill" href="#" data-mark="sticky_msgr">Написать в MAX</a>
+</div>
+
+<script>
+/* ================================================================
+   КАРКАСНЫЙ JS: табы, квиз, рекомендации, формы.
+   Дизайн-логики здесь нет, только поведение.
+================================================================= */
+
+/* ---------- АССОРТИМЕНТ (цены «от», не ниже РРЦ) ---------- */
+var SIZES = '80×200 · 90×200 · 120×200 · 140×200 · 160×200 · 180×200';
+var CATALOG = {
+  beds: [
+    {name:'Марта', price:33600},
+    {name:'Джессика', price:33900},
+    {name:'Ванесса', price:50200},
+    {name:'Квадра (детская)', price:30200},
+    {name:'Оливия Симпл 2 (детская)', price:30400}
+  ],
+  mattresses: [
+    {name:'CARBON Фэмили', price:21000},
+    {name:'Фаворит', price:24100},
+    {name:'Спарк', price:20100},
+    {name:'ULTRA Некст', price:22300},
+    {name:'Баланс', price:35000},
+    {name:'Модена', price:26200},
+    {name:'PLATINUM Делюкс', price:48500},
+    {name:'Оптима', price:45300}
+  ],
+  gzmi: [
+    {name:'Леон', price:16900},
+    {name:'Элегия', price:17750},
+    {name:'Фортуна 1', price:26500},
+    {name:'Венера 4 лайт', price:27750},
+    {name:'Фортуна 4 лайт', price:27750}
+  ],
+  tsar: [
+    {name:'Опал Классик Прайм', price:12400},
+    {name:'Коралл Микс Прайм', price:15450},
+    {name:'Опал Оптима Прайм', price:16400},
+    {name:'Опал Оптима', price:20300},
+    {name:'Лайт Микс', price:30800}
+  ]
+};
+
+/* ---------- Отрисовка витрины ---------- */
+function fmt(n){return n.toLocaleString('ru-RU') + ' ₽'}
+Object.keys(CATALOG).forEach(function(key){
+  var box = document.querySelector('[data-products="' + key + '"]');
+  if(!box) return;
+  CATALOG[key].forEach(function(p){
+    var el = document.createElement('div');
+    el.className = 'card';
+    el.innerHTML =
+      '<div class="ph" style="min-height:90px">[фото: ' + p.name + ']</div>' +
+      '<h3>' + p.name + '</h3>' +
+      '<p class="price">от ' + fmt(p.price) + '</p>' +
+      '<p class="sizes">' + SIZES + '</p>' +
+      '<a class="btn" href="#" data-mark="catalog_' + key + '" data-model="' + p.name + '">Узнать наличие</a>';
+    box.appendChild(el);
+  });
+});
+
+/* ---------- Табы ---------- */
+document.querySelectorAll('.tab-btn').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    document.querySelectorAll('.tab-btn').forEach(function(b){b.classList.remove('active')});
+    document.querySelectorAll('.tab-pane').forEach(function(p){p.classList.remove('active')});
+    btn.classList.add('active');
+    document.querySelector('[data-pane="' + btn.dataset.tab + '"]').classList.add('active');
+  });
+});
+
+/* ================================================================
+   КВИЗ
+================================================================= */
+var LS_KEY = 'korona_quiz_v1';
+
+function genCode(){
+  var L = 'АВГДЕЖЗИКЛМН'.charAt(Math.floor(Math.random()*12));
+  var N = String(100 + Math.floor(Math.random()*900));
+  return L + '-' + N;
+}
+
+var quiz = {
+  code: null,
+  step: 1,
+  answers: {}
+};
+
+/* Восстановление сессии квиза */
+try{
+  var saved = JSON.parse(localStorage.getItem(LS_KEY) || 'null');
+  if(saved && saved.code){ quiz = saved; }
+}catch(e){}
+if(!quiz.code){
+  quiz.code = genCode();
+  saveQuiz();
+}
+document.getElementById('quizCode').textContent = quiz.code;
+
+function saveQuiz(){
+  try{ localStorage.setItem(LS_KEY, JSON.stringify(quiz)); }catch(e){}
+  sendQuizProgress(); /* отправка данных на бэкенд: здесь */
+}
+
+/* >>> ОТПРАВКА НА БЭКЕНД <<<
+   Функция sendQuizProgress вызывается на каждом шаге, включая брошенный квиз.
+   Сюда подключается fetch на сервер: код подбора, шаг, ответы, метка источника (utm).
+   На сборке. Пока оставлена пустой, чтобы прототип работал локально. */
+function sendQuizProgress(){
+  /* backend hook: POST {code, step, answers, source} */
+}
+
+var stepLabels = {1:'Шаг 1 из 4', 2:'Шаг 2 из 4', 3:'Шаг 3 из 4', 4:'Шаг 4 из 4', 5:'Готово'};
+
+function showStep(n){
+  quiz.step = n;
+  saveQuiz();
+  document.querySelectorAll('.quiz-step').forEach(function(s){
+    s.classList.toggle('active', +s.dataset.step === n);
+  });
+  document.getElementById('quizProgress').textContent = stepLabels[n] || '';
+  document.getElementById('quizBar').style.width = (n >= 5 ? 100 : (n-1)*25) + '%';
+  if(n === 5){ renderFinal(); }
+}
+
+/* Выборы-варианты на шагах 1, 3, 4 */
+document.querySelectorAll('.opt').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    quiz.answers[btn.dataset.q] = btn.dataset.v;
+    saveQuiz();
+    showStep(Math.min(quiz.step + 1, 5));
+  });
+});
+
+/* Шаг 2: рост и вес */
+document.getElementById('step2Next').addEventListener('click', function(){
+  var h = document.getElementById('qHeight').value;
+  var w = document.getElementById('qWeight').value;
+  quiz.answers.height = h || 'не указан';
+  quiz.answers.weight = w || 'не указан';
+  saveQuiz();
+  showStep(3);
+});
+document.getElementById('step2Skip').addEventListener('click', function(){
+  quiz.answers.height = 'не указан';
+  quiz.answers.weight = 'не указан';
+  saveQuiz();
+  showStep(3);
+});
+
+/* ---------- Рекомендации по бюджету ----------
+   Простая карта: бюджет -> 2-3 модели из реального ассортимента.
+   Жёсткость намеренно не фильтруем: финал всегда отправляет в зал. */
+var RECO = {
+  'До 20 тыс':      ['Опал Классик Прайм', 'Коралл Микс Прайм', 'Опал Оптима Прайм'],
+  '20-35 тыс':      ['Спарк', 'CARBON Фэмили', 'Фаворит'],
+  '35-50 тыс':      ['Баланс', 'Модена', 'Оптима'],
+  'Дороже 50 тыс':  ['PLATINUM Делюкс', 'Оптима', 'Баланс'],
+  'Не важно':       ['Фаворит', 'Баланс', 'Оптима']
+};
+var ALL_PRODUCTS = [].concat(CATALOG.mattresses, CATALOG.tsar)
+  .reduce(function(acc, p){ acc[p.name] = p; return acc; }, {});
+
+function renderFinal(){
+  var budget = quiz.answers.budget || 'Не важно';
+  var names = RECO[budget] || RECO['Не важно'];
+  var box = document.getElementById('recoList');
+  box.innerHTML = '';
+  names.forEach(function(name){
+    var p = ALL_PRODUCTS[name];
+    if(!p) return;
+    var el = document.createElement('div');
+    el.className = 'card';
+    el.innerHTML =
+      '<h3>' + p.name + '</h3>' +
+      '<p class="price">от ' + fmt(p.price) + '</p>' +
+      '<p class="sizes">160×200 и другие размеры</p>';
+    box.appendChild(el);
+  });
+
+  /* WhatsApp: код и параметры подставляются в текст */
+  var text = 'Здравствуйте! Код подбора: ' + quiz.code +
+    '. Спит: ' + (quiz.answers.who || 'нет ответа') +
+    ', рост/вес: ' + (quiz.answers.height || 'нет ответа') + '/' + (quiz.answers.weight || 'нет ответа') +
+    ', жёсткость: ' + (quiz.answers.firm || 'нет ответа') +
+    ', бюджет: ' + (quiz.answers.budget || 'нет ответа') +
+    '. Хочу узнать наличие и цену.';
+  document.getElementById('quizWaBtn').href =
+    'https://wa.me/7[НОМЕР]?text=' + encodeURIComponent(text);
+}
+
+/* Возврат на пройденный шаг при перезагрузке */
+(function(){
+  var answered = 0;
+  if(quiz.answers.who) answered = 1;
+  if(quiz.answers.height !== undefined) answered = 2;
+  if(quiz.answers.firm) answered = 3;
+  if(quiz.answers.budget) answered = 4;
+  showStep(Math.min(answered + 1, 5));
+})();
+
+/* ---------- Кнопки «Узнать наличие» и мессенджеры-заглушки ---------- */
+document.addEventListener('click', function(e){
+  var t = e.target.closest('[data-model]');
+  if(t){
+    e.preventDefault();
+    alert('Заглушка прототипа. На сборке откроется чат с текстом: «Здравствуйте! Подскажите наличие и цену: ' + t.dataset.model + '»');
+    return;
+  }
+  var m = e.target.closest('a[data-mark]');
+  if(m && m.getAttribute('href') === '#'){
+    e.preventDefault();
+    alert('Заглушка прототипа. На сборке ссылка ведёт в чат магазина (MAX/WhatsApp), ссылка на политику или построитель маршрута.');
+  }
+});
+
+/* ---------- Формы «Перезвоните мне» ---------- */
+function bindCallbackForm(btnId, nameId, phoneId, msgId){
+  var btn = document.getElementById(btnId);
+  if(!btn) return;
+  btn.addEventListener('click', function(e){
+    e.preventDefault();
+    var name = document.getElementById(nameId).value.trim();
+    var phone = document.getElementById(phoneId).value.trim();
+    var msg = document.getElementById(msgId);
+    if(!phone){
+      msg.textContent = 'Напишите телефон, иначе не перезвоним.';
+      return;
+    }
+    /* >>> ОТПРАВКА НА БЭКЕНД <<< fetch {name, phone, code: quiz.code, source} */
+    msg.textContent = 'Принято. Перезвоним по номеру ' + phone + '.';
+    btn.disabled = true;
+  });
+}
+bindCallbackForm('cbSubmit', 'cbName', 'cbPhone', 'cbMsg');
+
+/* Компактная форма на первом экране (мобильная): только телефон */
+(function(){
+  var btn = document.getElementById('heroPhoneSubmit');
+  if(!btn) return;
+  btn.addEventListener('click', function(e){
+    e.preventDefault();
+    var phone = document.getElementById('heroPhone').value.trim();
+    var msg = document.getElementById('heroPhoneMsg');
+    if(!phone){
+      msg.textContent = 'Напишите телефон, иначе не перезвоним.';
+      return;
+    }
+    /* >>> ОТПРАВКА НА БЭКЕНД <<< fetch {phone, source: 'hero_mobile'} */
+    msg.textContent = 'Принято. Перезвоним по номеру ' + phone + '.';
+    btn.disabled = true;
+  });
+})();
+
+document.getElementById('finalForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  var name = document.getElementById('fName').value.trim();
+  var phone = document.getElementById('fPhone').value.trim();
+  var msg = document.getElementById('finalMsg');
+  if(!phone){ msg.textContent = 'Напишите телефон, иначе не перезвоним.'; return; }
+  /* >>> ОТПРАВКА НА БЭКЕНД <<< fetch {name, phone, source: 'final_form'} */
+  msg.textContent = 'Принято, ' + (name || 'спасибо') + '. Перезвоним по номеру ' + phone + '.';
+  this.querySelector('button[type="submit"]').disabled = true;
+});
+
+/* ---------- Ленивая загрузка виджета Яндекса и карты (заглушка) ---------- */
+if('IntersectionObserver' in window){
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
+      if(en.isIntersecting){
+        /* backend hook: сюда вставляется загрузка виджета Яндекс.Карт и карты */
+        io.unobserve(en.target);
+      }
+    });
+  }, {rootMargin:'200px'});
+  document.querySelectorAll('.ph').forEach(function(el){ io.observe(el); });
+}
+</script>
+</body>
+</html>
