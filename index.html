@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Матрасы Корона на БМБ, Оренбург. Прототип сайта, этап 2 (каркас)</title>
-<meta name="description" content="Прототип одностраничного сайта. Матрасы Корона на БМБ, Оренбург, Терешковой 281/3.">
+<title>БМБ: кровати и матрасы, Оренбург. Прототип сайта, этап 2 (каркас)</title>
+<meta name="description" content="Прототип одностраничного сайта. БМБ: кровати и матрасы, Оренбург, Терешковой 281/3.">
 <!--
 =====================================================================
-ПРОТОТИП САЙТА «МАТРАСЫ КОРОНА НА БМБ»: ЭТАП 2 ИЗ 4
+ПРОТОТИП САЙТА «БМБ: КРОВАТИ И МАТРАСЫ»: ЭТАП 2 ИЗ 4
 Каркас без дизайна. Серые блоки, видны границы. Вёрстка mobile-first.
 Дизайн и фирменные цвета: этап 3, после правок по прототипу.
 
@@ -17,6 +17,7 @@
 - Залы: «Фирменный отдел Корона» (место 53) и «Отдел нескольких фабрик» (место 40):
   рабочая гипотеза, проверить у Виктора, какое место к какому отделу
 - на сообщения в MAX отвечает Захар (видно из переписки), ждём подтверждения от Виктора
+- фото товаров для сна и тумб: запросить у фабрики
 Также до запуска: подтверждение рассрочки (три платежа заявлены в ВК и Яндексе),
 занос без грузового лифта, уведомление РКН.
 
@@ -283,7 +284,8 @@ footer.block{margin-bottom:0}
     <div class="hdr-left">
       <div class="hdr-logo">[ЛОГОТИП вектор]</div>
       <div>
-        <div class="hdr-title">Матрасы Корона на БМБ</div>
+        <div class="hdr-title">БМБ: кровати и матрасы</div>
+        <div class="hdr-sub">магазин фабрики Корона</div>
         <div class="hdr-sub">Оренбург, Терешковой 281/3, места 53 и 40</div>
       </div>
     </div>
@@ -302,7 +304,8 @@ footer.block{margin-bottom:0}
 
   <p class="small">[место под логотип фабрики в векторе, запрошен у клиента]</p>
 
-  <h1>Матрасы Корона на БМБ</h1>
+  <h1>БМБ: кровати и матрасы</h1>
+  <p class="small">магазин фабрики Корона</p>
   <p class="lead">Фирменный магазин фабрики «Корона». Подбираем матрас под рост и вес, называем цену сразу.</p>
 
   <p>
@@ -401,6 +404,7 @@ footer.block{margin-bottom:0}
   <div class="quiz-step" data-step="5">
     <h3>Готово. Ваши варианты:</h3>
     <div class="grid c3" id="recoList" style="margin:12px 0"></div>
+    <p class="small"><strong>Дополнить заказ:</strong> подушки, чехлы, топперы, тумбы в той же ткани, что и кровать, подберём в переписке.</p>
     <p class="note">Точную жёсткость подбирают в зале: по росту и весу подбираем нагрузку на пружинный блок, потом вы ложитесь на матрас и проверяете. Код подбора сохраняет ваши ответы.</p>
 
     <p style="margin-top:14px">
@@ -480,6 +484,7 @@ footer.block{margin-bottom:0}
     <button class="tab-btn" data-tab="mattresses">Матрасы «Корона»</button>
     <button class="tab-btn" data-tab="gzmi">Металлические кровати ГЗМИ</button>
     <button class="tab-btn" data-tab="tsar">Матрасы «Царские перины»</button>
+    <button class="tab-btn" data-tab="sleep">Товары для сна</button>
   </div>
 
   <div class="tab-pane active" data-pane="beds">
@@ -493,6 +498,66 @@ footer.block{margin-bottom:0}
   </div>
   <div class="tab-pane" data-pane="tsar">
     <div class="grid c3" data-products="tsar"></div>
+  </div>
+  <div class="tab-pane" data-pane="sleep">
+    <h3>Подушки</h3>
+    <div class="grid c3">
+      <div class="card">
+        <div class="ph" style="min-height:90px">[ФОТО запросим у фабрики]</div>
+        <h3>Ортопедическая Memory Max</h3>
+        <p class="price">3 600 ₽</p>
+        <a class="btn" href="#" data-mark="catalog_sleep" data-model="Подушка Ортопедическая Memory Max">Узнать наличие</a>
+      </div>
+      <div class="card">
+        <div class="ph" style="min-height:90px">[ФОТО запросим у фабрики]</div>
+        <h3>Мемори Классик</h3>
+        <p class="price">3 600 ₽</p>
+        <a class="btn" href="#" data-mark="catalog_sleep" data-model="Подушка Мемори Классик">Узнать наличие</a>
+      </div>
+      <div class="card">
+        <div class="ph" style="min-height:90px">[ФОТО запросим у фабрики]</div>
+        <h3>Organic Pro</h3>
+        <p class="price">6 700 ₽</p>
+        <a class="btn" href="#" data-mark="catalog_sleep" data-model="Подушка Organic Pro">Узнать наличие</a>
+      </div>
+    </div>
+    <p class="small">Есть детские ортопедические и другие размеры.</p>
+
+    <h3>Чехлы</h3>
+    <div class="grid c2">
+      <div class="card">
+        <div class="ph" style="min-height:90px">[ФОТО запросим у фабрики]</div>
+        <h3>Аквапротект</h3>
+        <p class="price">от 1 700 ₽</p>
+        <p class="small">от 60×120, делаем по индивидуальным размерам</p>
+        <a class="btn" href="#" data-mark="catalog_sleep" data-model="Чехол Аквапротект">Узнать наличие</a>
+      </div>
+      <div class="card">
+        <div class="ph" style="min-height:90px">[ФОТО запросим у фабрики]</div>
+        <h3>Смарт Стандарт</h3>
+        <p class="price">от 1 300 ₽</p>
+        <p class="small">от 80×200, только стандартные размеры</p>
+        <a class="btn" href="#" data-mark="catalog_sleep" data-model="Чехол Смарт Стандарт">Узнать наличие</a>
+      </div>
+    </div>
+
+    <h3>Топперы и наматрасники</h3>
+    <div class="grid c2">
+      <div class="card">
+        <div class="ph" style="min-height:90px">[ФОТО запросим у фабрики]</div>
+        <h3>Люксор</h3>
+        <p class="price">от 8 600 ₽</p>
+        <p class="small">эффект памяти, любые размеры</p>
+        <a class="btn" href="#" data-mark="catalog_sleep" data-model="Топпер Люксор">Узнать наличие</a>
+      </div>
+      <div class="card">
+        <div class="ph" style="min-height:90px">[ФОТО запросим у фабрики]</div>
+        <h3>Гранд</h3>
+        <p class="price">от 5 600 ₽</p>
+        <p class="small">из ППУ, любые размеры</p>
+        <a class="btn" href="#" data-mark="catalog_sleep" data-model="Топпер Гранд">Узнать наличие</a>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -768,7 +833,8 @@ footer.block{margin-bottom:0}
 ================================================================= -->
 <footer class="block" id="footer">
   <span class="block-tag">Блок 14. Подвал</span>
-  <p><strong>Матрасы Корона на БМБ</strong><br>
+  <p><strong>БМБ: кровати и матрасы</strong><br>
+  магазин фабрики Корона<br>
   Оренбург, Терешковой 281/3, БМБ, места 53 и 40 · 10:00-20:00, без перерывов и выходных<br>
   Телефон: <a href="tel:+79033980560">+7 (903) 398-05-60</a></p>
   <p class="small">[РЕКВИЗИТЫ: ИП/ООО, ИНН, ОГРН: ждём от клиента]</p>
@@ -795,7 +861,9 @@ var CATALOG = {
     {name:'Джессика', price:33900},
     {name:'Ванесса', price:50200},
     {name:'Квадра (детская)', price:30200},
-    {name:'Оливия Симпл 2 (детская)', price:30400}
+    {name:'Оливия Симпл 2 (детская)', price:30400},
+    {name:'Тумба Глория 2', price:11400, sizes:'', note:'в той же ткани, что и кровать'},
+    {name:'Тумба София 2', price:12000, sizes:'', note:'в той же ткани, что и кровать'}
   ],
   mattresses: [
     {name:'CARBON Фэмили', price:21000},
@@ -835,7 +903,8 @@ Object.keys(CATALOG).forEach(function(key){
       '<div class="ph" style="min-height:90px">[фото: ' + p.name + ']</div>' +
       '<h3>' + p.name + '</h3>' +
       '<p class="price">от ' + fmt(p.price) + '</p>' +
-      '<p class="sizes">' + SIZES + '</p>' +
+      '<p class="sizes">' + (p.sizes !== undefined ? p.sizes : SIZES) + '</p>' +
+      (p.note ? '<p class="small">' + p.note + '</p>' : '') +
       '<a class="btn" href="#" data-mark="catalog_' + key + '" data-model="' + p.name + '">Узнать наличие</a>';
     box.appendChild(el);
   });
