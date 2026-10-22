@@ -8,7 +8,7 @@
 <style>
 :root{
   --purple:#6B3A5C; --purple-dark:#4E2A43; --purple-tint:#F4EDF1; --purple-ghost:#E3D4DE;
-  --bg:#FAF7F4; --surface:#FFF; --ink:#29242B; --ink2:#5D5760; --line:#E7E1DC;
+  --bg:#FAF7F4; --surface:#FFF; --ink:#29242B; --ink2:#5D5760; --line:#DCCDD3;
   --success:#2E7D4F;
   --font:-apple-system,"Segoe UI",Roboto,"PT Sans",Arial,sans-serif;
   --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
@@ -33,7 +33,7 @@ h3{font-size:17px;line-height:1.3}
   text-decoration:none;cursor:pointer;text-align:center}
 .btn.fill{background:var(--purple);color:#fff;border-color:var(--purple)}
 .btn.fill:hover{background:var(--purple-dark)}
-.btn.ghost{border-color:var(--line)}
+.btn.ghost{border-color:var(--purple);color:var(--purple)}
 .btn svg{flex:none}
 .btn-col{display:flex;flex-direction:column;gap:10px;margin-top:16px}
 @media(min-width:640px){.btn-col{flex-direction:row}.btn-col .btn{width:auto}}
@@ -81,7 +81,7 @@ body{padding-bottom:0}
 .quiz-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:22px;margin-top:16px}
 .quiz-progress{font-size:13px;color:var(--ink2);letter-spacing:.06em}
 .quiz-bar{display:flex;gap:8px;margin:12px 0 20px}
-.quiz-bar i{height:6px;flex:1;background:var(--line);border-radius:3px}
+.quiz-bar i{height:6px;flex:1;background:var(--purple-tint);border-radius:3px}
 .quiz-bar i.done{background:var(--purple)}
 .quiz-step{display:none}
 .quiz-step.active{display:block}
@@ -102,7 +102,7 @@ body{padding-bottom:0}
 .why-grid{display:grid;gap:12px;grid-template-columns:1fr 1fr}
 @media(max-width:560px){.why-grid{grid-template-columns:1fr 1fr}}
 .why-card{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:18px;display:flex;flex-direction:column;gap:8px}
-.why-card .dot{width:9px;height:9px;border-radius:50%;background:var(--purple)}
+.why-card .dot{display:none}
 .why-card p{font-size:14px;color:var(--ink2);line-height:1.5}
 
 /* Витрина */
@@ -189,6 +189,54 @@ footer{background:var(--purple-tint);padding:36px 0;margin-top:20px}
 footer .f-badge{display:inline-block;background:var(--purple);color:#fff;font-size:11px;font-weight:700;letter-spacing:.08em;padding:6px 10px;border-radius:8px;margin-bottom:12px}
 footer a{color:var(--purple)}
 footer p{margin-bottom:8px;font-size:15px}
+
+/* Шапка: бренд и иконка MAX */
+.brand{display:flex;align-items:center;text-decoration:none}
+.brand-img{height:30px;width:auto;mix-blend-mode:multiply}
+.brand-sep{width:1px;height:28px;background:var(--line);flex:none}
+.hdr-max{display:flex;align-items:center;justify-content:center;width:40px;height:40px;
+  border-radius:11px;background:var(--purple);color:#fff;text-decoration:none;flex:none}
+.hdr-max span{font:700 11px/1 Arial,Helvetica,sans-serif;letter-spacing:.6px}
+
+/* Первый экран: новая сетка */
+.hero2{display:grid;gap:20px}
+@media(min-width:900px){.hero2{grid-template-columns:minmax(0,1fr) 440px;gap:40px;align-items:start}}
+.hero-side{display:grid;gap:12px}
+.hero-side img{border-radius:var(--r)}
+.max-card{display:flex;align-items:center;gap:12px;min-height:66px;padding:14px 16px;
+  background:var(--surface);border:1px solid var(--line);border-radius:14px;
+  text-decoration:none;color:var(--ink);font-size:16px;font-weight:600}
+.max-card:hover{border-color:var(--purple);background:var(--purple-tint)}
+.max-card .ic{display:flex;align-items:center;justify-content:center;width:40px;height:40px;
+  border-radius:11px;background:var(--purple);color:#fff;font:700 11px/1 Arial,Helvetica,sans-serif;letter-spacing:.6px;flex:none}
+.hero-form{display:grid;grid-template-columns:1fr;gap:6px 16px;align-items:end;
+  margin-top:24px;padding:18px 20px;background:var(--surface);
+  border:1px solid var(--line);border-radius:14px}
+@media(min-width:900px){.hero-form{grid-template-columns:1fr 240px}}
+.hero-form label{grid-column:1/-1;font-size:14px;color:var(--ink2)}
+.hero-form input,.hero-form .btn{height:50px}
+
+/* Как подбираем: шаги */
+.steps{display:grid;gap:12px;margin-top:16px}
+@media(min-width:768px){.steps{grid-template-columns:repeat(4,1fr)}}
+.step{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:18px}
+.step .num{display:flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;background:var(--purple);color:#fff;font-weight:800;font-size:15px;margin-bottom:10px}
+.step p{font-size:14px;color:var(--ink2);line-height:1.5}
+.step b{display:block;font-size:15px;margin-bottom:4px}
+
+/* Состав: текст в две колонки под фото */
+.layers-2col{columns:1}
+@media(min-width:768px){.layers-2col{columns:2;column-gap:32px}}
+.layers-2col li{break-inside:avoid}
+
+/* Финальная форма */
+.final-form{display:grid;gap:10px;max-width:520px;margin-top:16px}
+.final-form label{font-size:14px;color:var(--ink2)}
+.consent{font-size:13px;color:var(--ink2)}
+.consent a{color:var(--purple)}
+
+/* Квиз: кнопка назад */
+.quiz-back{background:none;border:none;color:var(--ink2);text-decoration:underline;font-size:14px;cursor:pointer;font-family:inherit;padding:8px 0;margin-top:6px}
 </style>
 </head>
 <body>
@@ -197,42 +245,50 @@ footer p{margin-bottom:8px;font-size:15px}
 <header class="hdr">
   <div class="hdr-in">
     <div class="hdr-left">
-      <span class="hdr-badge">КОРОНА</span>
+      <a class="brand" href="#top" aria-label="Корона, магазин фабрики"><img src="img/logo-korona.png" alt="Корона" class="brand-img" onerror="this.remove();document.getElementById('hdrBadge').hidden=false"></a>
+      <span class="hdr-badge" id="hdrBadge" hidden>КОРОНА</span>
+      <span class="brand-sep" aria-hidden="true"></span>
       <div>
         <div class="hdr-title">БМБ: кровати и матрасы</div>
         <div class="hdr-sub">магазин фабрики Корона</div>
       </div>
     </div>
-    <a class="hdr-phone" href="tel:+79033980560">+7 (903) 398-05-60</a>
+    <a class="hdr-max" href="https://max.ru/u/f9LHodD0cOJCXonOE7L-6d2Cn6Nf_J-C3UZZcRvgBYKgweEdzWz5XIKUxtk" target="_blank" rel="noopener" aria-label="Написать в MAX"><span>MAX</span></a>
   </div>
 </header>
 
 <!-- 1. Первый экран -->
 <section id="top">
-  <div class="wrap hero-grid">
-    <div class="hero-img"><img src="img/IMG_9470.jpg" alt="Фирменный стенд Корона в ТЦ Большой мебельный базар" fetchpriority="high"></div>
-    <div>
-      <span class="hero-badge">КОРОНА · МЕБЕЛЬНАЯ ФАБРИКА</span>
-      <h1>Матрас под рост и вес, цена сразу</h1>
-      <p class="hero-sub">Фирменный магазин Корона на БМБ, Оренбург</p>
-      <p class="price-badge">Комплекты кровать + матрас от 27 000 ₽</p>
-      <p class="addr">г. Оренбург, Терешковой 281/3, Большой мебельный базар<br>
-      Зал «Фирменный отдел Корона», место 53 · Зал «Отдел нескольких фабрик», место 40<br>
-      Ежедневно 10:00-20:00, без перерывов и выходных</p>
-      <div class="stats">
-        <div class="stat"><b>4,8</b><span>на Яндекс.Картах из 63 оценок</span></div>
-        <div class="stat"><b>10 лет</b><span>в Оренбурге на одном месте</span></div>
+  <div class="wrap">
+    <div class="hero2">
+      <div>
+        <span class="hero-badge">КОРОНА · МЕБЕЛЬНАЯ ФАБРИКА</span>
+        <h1>Матрас под рост и вес, цена сразу</h1>
+        <p class="hero-sub">Фирменный магазин Корона на БМБ, Оренбург</p>
+        <p class="price-badge">Матрасы от 12 400 ₽ · комплекты кровать + матрас от 27 000 ₽</p>
+        <p class="addr">г. Оренбург, Терешковой 281/3, Большой мебельный базар<br>
+        Зал «Фирменный отдел Корона», место 53 · Зал «Отдел нескольких фабрик», место 40<br>
+        Ежедневно 10:00-20:00, без перерывов и выходных</p>
+        <div class="stats">
+          <div class="stat"><b>4,8</b><span>на Яндекс.Картах из 63 оценок</span></div>
+          <div class="stat"><b>10 лет</b><span>в Оренбурге на одном месте</span></div>
+        </div>
       </div>
-      <div class="btn-col">
-        <a class="btn fill" href="https://max.ru/u/f9LHodD0cOJCXonOE7L-6d2Cn6Nf_J-C3UZZcRvgBYKgweEdzWz5XIKUxtk" target="_blank" rel="noopener">Написать в MAX</a>
-        <a class="btn" href="tel:+79033980560">Позвонить: +7 (903) 398-05-60</a>
+      <div class="hero-side">
+        <img src="img/IMG_9470.webp" alt="Фирменный стенд Корона в ТЦ Большой мебельный базар" fetchpriority="high">
+        <a class="max-card" href="https://max.ru/u/f9LHodD0cOJCXonOE7L-6d2Cn6Nf_J-C3UZZcRvgBYKgweEdzWz5XIKUxtk" target="_blank" rel="noopener">
+          <span class="ic" aria-hidden="true">MAX</span>
+          <span>Написать в MAX<br><span style="font-weight:400;font-size:14px;color:var(--ink2)">Отвечает продавец, не бот</span></span>
+        </a>
       </div>
-      <p class="small" style="margin-top:10px"><a href="https://wa.me/79033980560?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%BF%D0%BE%D0%B4%D0%BE%D0%B1%D1%80%D0%B0%D1%82%D1%8C%20%D0%BC%D0%B0%D1%82%D1%80%D0%B0%D1%81." target="_blank" rel="noopener" style="color:var(--purple)">Написать в WhatsApp</a></p>
-      <p class="small" style="margin-top:18px"><strong style="color:var(--ink)">Проще телефон?</strong> Оставьте номер, перезвоним.</p>
-      <div class="field"><input type="tel" id="heroPhone" inputmode="tel" placeholder="+7 ___ ___-__-__"></div>
-      <button class="btn ghost" id="heroPhoneSubmit">Перезвоните мне</button>
-      <p class="form-msg" id="heroPhoneMsg"></p>
     </div>
+    <form class="hero-form" id="heroForm" novalidate>
+      <label for="heroPhone">Оставьте телефон, перезвоним и назовём цену</label>
+      <input type="tel" id="heroPhone" inputmode="tel" autocomplete="tel" required placeholder="+7 ___ ___-__-__">
+      <button class="btn fill" type="submit" id="heroPhoneSubmit">Перезвоните мне</button>
+      <p class="form-msg" id="heroPhoneMsg" style="grid-column:1/-1"></p>
+      <p class="consent" style="grid-column:1/-1">Нажимая кнопку, вы соглашаетесь с <a href="privacy.html" target="_blank" rel="noopener">политикой обработки данных</a>.</p>
+    </form>
   </div>
 </section>
 
@@ -256,12 +312,13 @@ footer p{margin-bottom:8px;font-size:15px}
         <h3>Рост и вес спящего</h3>
         <p class="small" style="margin:6px 0 12px">Если спите вдвоём, укажите данные того, кому нужна более жёсткая сторона.</p>
         <div class="two-col">
-          <div class="field"><input type="number" id="qHeight" inputmode="numeric" min="100" max="230" placeholder="Рост, см"></div>
-          <div class="field"><input type="number" id="qWeight" inputmode="numeric" min="20" max="250" placeholder="Вес, кг"></div>
+          <div class="field"><label for="qHeight" class="small">Рост, см</label><input type="number" id="qHeight" inputmode="numeric" min="100" max="230" placeholder="Рост, см"></div>
+          <div class="field"><label for="qWeight" class="small">Вес, кг</label><input type="number" id="qWeight" inputmode="numeric" min="20" max="250" placeholder="Вес, кг"></div>
         </div>
-        <p class="small">Нужно для подбора жёсткости. Данные никуда не уходят, видит только продавец.</p>
+        <p class="small">Нужно для подбора жёсткости. Данные остаются на вашем устройстве.</p>
         <button class="btn fill" id="step2Next" style="margin-top:10px">Дальше</button>
         <button class="link-btn" id="step2Skip">Не хочу указывать</button>
+        <button class="quiz-back" data-back="1">← Назад</button>
       </div>
 
       <div class="quiz-step" data-step="3">
@@ -270,6 +327,7 @@ footer p{margin-bottom:8px;font-size:15px}
         <button class="opt" data-q="firm" data-v="Средний">Средний</button>
         <button class="opt" data-q="firm" data-v="Жёсткий">Жёсткий</button>
         <button class="opt" data-q="firm" data-v="Не знаю">Не знаю</button>
+        <button class="quiz-back" data-back="2">← Назад</button>
       </div>
 
       <div class="quiz-step" data-step="4">
@@ -277,28 +335,29 @@ footer p{margin-bottom:8px;font-size:15px}
         <button class="opt" data-q="budget" data-v="До 20 тыс">До 20 тыс ₽</button>
         <button class="opt" data-q="budget" data-v="20-35 тыс">20-35 тыс ₽</button>
         <button class="opt" data-q="budget" data-v="35-50 тыс">35-50 тыс ₽</button>
-        <button class="opt" data-q="budget" data-v="Дороже 50 тыс">Дороже 50 тыс ₽</button>
         <button class="opt" data-q="budget" data-v="Не важно">Бюджет не важен</button>
+        <button class="quiz-back" data-back="3">← Назад</button>
       </div>
 
       <div class="quiz-step" data-step="5">
         <h3>Готово. Ваши варианты:</h3>
         <div class="code-box"><span class="small">Ваш код подбора</span><br><b id="quizCode">...</b></div>
-        <p class="small">Код уже внутри сообщения: нажимаете кнопку ниже, чат открывается с готовым текстом. Ничего копировать не нужно. В зале просто назовите код продавцу.</p>
+        <p class="small">Кнопка ниже копирует ваш подбор и открывает чат: вставьте текст в сообщение, продавец сразу увидит ответы. В зале просто назовите код.</p>
         <div id="recoList" style="margin:14px 0"></div>
         <p style="margin:14px 0 6px"><strong>Что дальше:</strong></p>
         <ul class="next-list">
-          <li>Пишете в чат прямо с этой страницы.</li>
-          <li>Отвечает продавец, по коду видит ваши ответы.</li>
+          <li>Нажимаете кнопку, подбор копируется, открывается чат.</li>
+          <li>Вставляете текст в сообщение, отвечает продавец.</li>
           <li>Приходите полежать в зале, покупать не обязательно.</li>
         </ul>
         <div class="btn-col">
-          <a class="btn fill" id="quizMaxBtn" href="https://max.ru/u/f9LHodD0cOJCXonOE7L-6d2Cn6Nf_J-C3UZZcRvgBYKgweEdzWz5XIKUxtk" target="_blank" rel="noopener">Написать в MAX</a>
-          <a class="btn" id="quizWaBtn" href="https://wa.me/79033980560" target="_blank" rel="noopener">Написать в WhatsApp</a>
+          <button class="btn fill" id="quizMaxBtn">Скопировать подбор и открыть MAX</button>
+          <a class="btn" id="quizWaBtn" href="https://wa.me/79033980560" target="_blank" rel="noopener">Отправить в WhatsApp (текст уже готов)</a>
         </div>
-        <p class="small">Откроется чат с магазином, ваш подбор уже внутри сообщения.</p>
+        <p class="form-msg" id="quizCopyMsg"></p>
         <p class="small" style="margin-top:12px"><strong style="color:var(--ink)">Дополнить заказ:</strong> подушки, чехлы, топперы, тумбы в той же ткани, что и кровать, подберём в переписке.</p>
         <div class="note" style="margin-top:14px">Точную жёсткость подбираем в зале: ложитесь на каждый из вариантов, код сохраняет ваши ответы.</div>
+        <button class="quiz-back" data-back="4">← Назад</button>
       </div>
     </div>
   </div>
@@ -314,7 +373,7 @@ footer p{margin-bottom:8px;font-size:15px}
       <div class="why-card"><span class="dot"></span><h3>Стаж продавцов от 3 лет</h3><p>Обучение на фабрике «Корона» каждый год. Подбирают по росту, весу и привычкам.</p></div>
       <div class="why-card"><span class="dot"></span><h3>Цена в договоре</h3><p>Внесли предоплату, цена не вырастет к доставке.</p></div>
       <div class="why-card"><span class="dot"></span><h3>Гарантия 18 месяцев</h3><p>Официальная, от фабрики. Работаем с гарантийными случаями сами.</p></div>
-      <div class="why-card"><span class="dot"></span><h3>По гарантии решаем сами</h3><p>Решение по гарантии принимаем сами, без колл-центра в другом городе.</p></div>
+      <div class="why-card"><span class="dot"></span><h3>По гарантии решаем сами</h3><p>Гарантийный случай решаем в зале, на месте.</p></div>
     </div>
   </div>
 </section>
@@ -325,46 +384,46 @@ footer p{margin-bottom:8px;font-size:15px}
     <h2>Витрина и цены</h2>
     <p class="small">Цены «от», не ниже РРЦ фабрики. Стандартный ряд 80-180×200, детские и нестандарт под заказ. Точную цену по размеру назовём в переписке или в зале.</p>
     <div class="tabs">
-      <button class="tab active" data-tab="beds">Кровати</button>
-      <button class="tab" data-tab="mattresses">Матрасы</button>
+      <button class="tab" data-tab="beds">Кровати</button>
+      <button class="tab active" data-tab="mattresses">Матрасы</button>
       <button class="tab" data-tab="gzmi">ГЗМИ</button>
       <button class="tab" data-tab="tsar">Перины</button>
       <button class="tab" data-tab="sleep">Для сна</button>
     </div>
 
-    <div class="pane active" data-pane="beds">
+    <div class="pane" data-pane="beds">
       <div class="prod-grid">
-        <div class="prod" id="card-marta"><img src="img/marta-live.jpg" alt="Кровать Марта" loading="lazy"><div class="prod-body"><h3>Марта</h3><p class="price">от 33 600 ₽</p><a class="btn" href="https://max.ru/u/f9LHodD0cOJCXonOE7L-6d2Cn6Nf_J-C3UZZcRvgBYKgweEdzWz5XIKUxtk" target="_blank" rel="noopener">Спросить про эту кровать</a></div></div>
-        <div class="prod" id="card-jessica"><img src="img/jessica-bed.jpg" alt="Кровать Джессика" loading="lazy"><div class="prod-body"><h3>Джессика</h3><p class="price">от 33 900 ₽</p><a class="btn" href="https://max.ru/u/f9LHodD0cOJCXonOE7L-6d2Cn6Nf_J-C3UZZcRvgBYKgweEdzWz5XIKUxtk" target="_blank" rel="noopener">Спросить про эту кровать</a></div></div>
-        <div class="prod" id="card-vanessa"><img src="img/vanessa-live.jpg" alt="Кровать Ванесса" loading="lazy"><div class="prod-body"><h3>Ванесса</h3><p class="price">от 50 200 ₽</p><a class="btn" href="https://max.ru/u/f9LHodD0cOJCXonOE7L-6d2Cn6Nf_J-C3UZZcRvgBYKgweEdzWz5XIKUxtk" target="_blank" rel="noopener">Спросить про эту кровать</a></div></div>
-        <div class="prod" id="card-kvadra"><img src="img/kvadra-live.jpg" alt="Кровать Квадра" loading="lazy"><div class="prod-body"><h3>Квадра <span class="tag">(детская)</span></h3><p class="price">от 30 200 ₽</p><a class="btn" href="https://max.ru/u/f9LHodD0cOJCXonOE7L-6d2Cn6Nf_J-C3UZZcRvgBYKgweEdzWz5XIKUxtk" target="_blank" rel="noopener">Спросить про эту кровать</a></div></div>
+        <div class="prod" id="card-marta"><img src="img/marta-live.webp" alt="Кровать Марта" loading="lazy"><div class="prod-body"><h3>Марта</h3><p class="price">от 33 600 ₽</p><a class="btn" href="https://max.ru/u/f9LHodD0cOJCXonOE7L-6d2Cn6Nf_J-C3UZZcRvgBYKgweEdzWz5XIKUxtk" target="_blank" rel="noopener">Спросить про эту кровать</a></div></div>
+        <div class="prod" id="card-jessica"><img src="img/jessica-bed.webp" alt="Кровать Джессика" loading="lazy"><div class="prod-body"><h3>Джессика</h3><p class="price">от 33 900 ₽</p><a class="btn" href="https://max.ru/u/f9LHodD0cOJCXonOE7L-6d2Cn6Nf_J-C3UZZcRvgBYKgweEdzWz5XIKUxtk" target="_blank" rel="noopener">Спросить про эту кровать</a></div></div>
+        <div class="prod" id="card-vanessa"><img src="img/vanessa-live.webp" alt="Кровать Ванесса" loading="lazy"><div class="prod-body"><h3>Ванесса</h3><p class="price">от 50 200 ₽</p><a class="btn" href="https://max.ru/u/f9LHodD0cOJCXonOE7L-6d2Cn6Nf_J-C3UZZcRvgBYKgweEdzWz5XIKUxtk" target="_blank" rel="noopener">Спросить про эту кровать</a></div></div>
+        <div class="prod" id="card-kvadra"><img src="img/kvadra-live.webp" alt="Кровать Квадра" loading="lazy"><div class="prod-body"><h3>Квадра <span class="tag">(детская)</span></h3><p class="price">от 30 200 ₽</p><a class="btn" href="https://max.ru/u/f9LHodD0cOJCXonOE7L-6d2Cn6Nf_J-C3UZZcRvgBYKgweEdzWz5XIKUxtk" target="_blank" rel="noopener">Спросить про эту кровать</a></div></div>
         <div class="prod"><div class="tint"></div><div class="prod-body"><h3>Оливия Симпл 2 <span class="tag">(детская)</span></h3><p class="price">от 30 400 ₽</p><a class="btn" href="https://max.ru/u/f9LHodD0cOJCXonOE7L-6d2Cn6Nf_J-C3UZZcRvgBYKgweEdzWz5XIKUxtk" target="_blank" rel="noopener">Спросить про эту кровать</a></div></div>
-        <div class="prod"><img src="img/IMG_9540.jpg" alt="Образцы тканей" loading="lazy"><div class="prod-body"><h3>Тумба Глория 2</h3><p class="tag">в той же ткани, что и кровать</p><p class="price">от 11 400 ₽</p><a class="btn" href="https://max.ru/u/f9LHodD0cOJCXonOE7L-6d2Cn6Nf_J-C3UZZcRvgBYKgweEdzWz5XIKUxtk" target="_blank" rel="noopener">Спросить про тумбу</a></div></div>
-        <div class="prod"><img src="img/IMG_9551.jpg" alt="Образцы тканей" loading="lazy"><div class="prod-body"><h3>Тумба София 2</h3><p class="tag">в той же ткани, что и кровать</p><p class="price">от 12 000 ₽</p><a class="btn" href="https://max.ru/u/f9LHodD0cOJCXonOE7L-6d2Cn6Nf_J-C3UZZcRvgBYKgweEdzWz5XIKUxtk" target="_blank" rel="noopener">Спросить про тумбу</a></div></div>
+        <div class="prod"><img src="img/IMG_9540.webp" alt="Образцы тканей" loading="lazy"><div class="prod-body"><h3>Тумба Глория 2</h3><p class="tag">в той же ткани, что и кровать</p><p class="price">от 11 400 ₽</p><a class="btn" href="https://max.ru/u/f9LHodD0cOJCXonOE7L-6d2Cn6Nf_J-C3UZZcRvgBYKgweEdzWz5XIKUxtk" target="_blank" rel="noopener">Спросить про тумбу</a></div></div>
+        <div class="prod"><img src="img/IMG_9551.webp" alt="Образцы тканей" loading="lazy"><div class="prod-body"><h3>Тумба София 2</h3><p class="tag">в той же ткани, что и кровать</p><p class="price">от 12 000 ₽</p><a class="btn" href="https://max.ru/u/f9LHodD0cOJCXonOE7L-6d2Cn6Nf_J-C3UZZcRvgBYKgweEdzWz5XIKUxtk" target="_blank" rel="noopener">Спросить про тумбу</a></div></div>
         <div class="more-card"><h3>Нужен другой размер?</h3><p class="small">Под заказ и нестандарт. Напишите, назовём цену и срок.</p><a class="btn fill" href="https://max.ru/u/f9LHodD0cOJCXonOE7L-6d2Cn6Nf_J-C3UZZcRvgBYKgweEdzWz5XIKUxtk" target="_blank" rel="noopener">Написать в MAX</a></div>
       </div>
     </div>
 
-    <div class="pane" data-pane="mattresses">
+    <div class="pane active" data-pane="mattresses">
       <p class="small" style="margin-bottom:12px">Цены за размер 160×200. <a href="#inside" style="color:var(--purple)">Состав каждой модели показываем до покупки: блок «Открытый состав» ниже</a></p>
       <div class="prod-grid">
-        <div class="prod" id="card-spark"><img src="img/carbon-spark.jpg" alt="Матрас CARBON Спарк" loading="lazy"><div class="prod-body"><h3>CARBON Спарк</h3><p class="price">20 100 ₽</p><a class="btn" href="https://max.ru/u/f9LHodD0cOJCXonOE7L-6d2Cn6Nf_J-C3UZZcRvgBYKgweEdzWz5XIKUxtk" target="_blank" rel="noopener">Спросить про этот матрас</a></div></div>
-        <div class="prod" id="card-family"><img src="img/carbon-family.jpg" alt="Матрас CARBON Фэмили" loading="lazy"><div class="prod-body"><h3>CARBON Фэмили</h3><p class="price">21 000 ₽</p><a class="btn" href="https://max.ru/u/f9LHodD0cOJCXonOE7L-6d2Cn6Nf_J-C3UZZcRvgBYKgweEdzWz5XIKUxtk" target="_blank" rel="noopener">Спросить про этот матрас</a></div></div>
-        <div class="prod" id="card-next"><img src="img/ultra-next.jpg" alt="Матрас ULTRA Некст" loading="lazy"><div class="prod-body"><h3>ULTRA Некст</h3><p class="price">22 300 ₽</p><a class="btn" href="https://max.ru/u/f9LHodD0cOJCXonOE7L-6d2Cn6Nf_J-C3UZZcRvgBYKgweEdzWz5XIKUxtk" target="_blank" rel="noopener">Спросить про этот матрас</a></div></div>
-        <div class="prod" id="card-favorit"><img src="img/carbon-favorit.jpg" alt="Матрас CARBON Фаворит" loading="lazy"><div class="prod-body"><h3>CARBON Фаворит</h3><p class="price">24 100 ₽</p><a class="btn" href="https://max.ru/u/f9LHodD0cOJCXonOE7L-6d2Cn6Nf_J-C3UZZcRvgBYKgweEdzWz5XIKUxtk" target="_blank" rel="noopener">Спросить про этот матрас</a></div></div>
-        <div class="prod" id="card-modena"><img src="img/ultra-modena.jpg" alt="Матрас ULTRA Модена" loading="lazy"><div class="prod-body"><h3>ULTRA Модена</h3><p class="price">26 200 ₽</p><a class="btn" href="https://max.ru/u/f9LHodD0cOJCXonOE7L-6d2Cn6Nf_J-C3UZZcRvgBYKgweEdzWz5XIKUxtk" target="_blank" rel="noopener">Спросить про этот матрас</a></div></div>
-        <div class="prod" id="card-balance"><img src="img/ultra-balance.jpg" alt="Матрас ULTRA Баланс" loading="lazy"><div class="prod-body"><h3>ULTRA Баланс</h3><p class="price">35 000 ₽</p><p class="tag">+ хлопковый чехол в подарок</p><a class="btn" href="https://max.ru/u/f9LHodD0cOJCXonOE7L-6d2Cn6Nf_J-C3UZZcRvgBYKgweEdzWz5XIKUxtk" target="_blank" rel="noopener">Спросить про этот матрас</a></div></div>
-        <div class="prod" id="card-optima"><img src="img/platinum-optima.jpg" alt="Матрас PLATINUM Оптима" loading="lazy"><div class="prod-body"><h3>PLATINUM Оптима</h3><p class="price">45 300 ₽</p><p class="tag">+ ортопедическая подушка в подарок</p><a class="btn" href="https://max.ru/u/f9LHodD0cOJCXonOE7L-6d2Cn6Nf_J-C3UZZcRvgBYKgweEdzWz5XIKUxtk" target="_blank" rel="noopener">Спросить про этот матрас</a></div></div>
-        <div class="prod" id="card-deluxe"><img src="img/platinum-deluxe.jpg" alt="Матрас PLATINUM Делюкс" loading="lazy"><div class="prod-body"><h3>PLATINUM Делюкс</h3><p class="price">48 500 ₽</p><p class="tag">+ ортопедическая подушка в подарок</p><a class="btn" href="https://max.ru/u/f9LHodD0cOJCXonOE7L-6d2Cn6Nf_J-C3UZZcRvgBYKgweEdzWz5XIKUxtk" target="_blank" rel="noopener">Спросить про этот матрас</a></div></div>
+        <div class="prod" id="card-spark"><img src="img/carbon-spark.webp" alt="Матрас CARBON Спарк" loading="lazy"><div class="prod-body"><h3>CARBON Спарк</h3><p class="price">20 100 ₽</p><p class="tag">Цена за 160×200, другой размер под заказ</p><a class="btn" href="https://max.ru/u/f9LHodD0cOJCXonOE7L-6d2Cn6Nf_J-C3UZZcRvgBYKgweEdzWz5XIKUxtk" target="_blank" rel="noopener">Спросить про этот матрас</a></div></div>
+        <div class="prod" id="card-family"><img src="img/carbon-family.webp" alt="Матрас CARBON Фэмили" loading="lazy"><div class="prod-body"><h3>CARBON Фэмили</h3><p class="price">21 000 ₽</p><p class="tag">Цена за 160×200, другой размер под заказ</p><a class="btn" href="https://max.ru/u/f9LHodD0cOJCXonOE7L-6d2Cn6Nf_J-C3UZZcRvgBYKgweEdzWz5XIKUxtk" target="_blank" rel="noopener">Спросить про этот матрас</a></div></div>
+        <div class="prod" id="card-next"><img src="img/ultra-next.webp" alt="Матрас ULTRA Некст" loading="lazy"><div class="prod-body"><h3>ULTRA Некст</h3><p class="price">22 300 ₽</p><p class="tag">Цена за 160×200, другой размер под заказ</p><a class="btn" href="https://max.ru/u/f9LHodD0cOJCXonOE7L-6d2Cn6Nf_J-C3UZZcRvgBYKgweEdzWz5XIKUxtk" target="_blank" rel="noopener">Спросить про этот матрас</a></div></div>
+        <div class="prod" id="card-favorit"><img src="img/carbon-favorit.webp" alt="Матрас CARBON Фаворит" loading="lazy"><div class="prod-body"><h3>CARBON Фаворит</h3><p class="price">24 100 ₽</p><p class="tag">Цена за 160×200, другой размер под заказ</p><a class="btn" href="https://max.ru/u/f9LHodD0cOJCXonOE7L-6d2Cn6Nf_J-C3UZZcRvgBYKgweEdzWz5XIKUxtk" target="_blank" rel="noopener">Спросить про этот матрас</a></div></div>
+        <div class="prod" id="card-modena"><img src="img/ultra-modena.webp" alt="Матрас ULTRA Модена" loading="lazy"><div class="prod-body"><h3>ULTRA Модена</h3><p class="price">26 200 ₽</p><p class="tag">Цена за 160×200, другой размер под заказ</p><a class="btn" href="https://max.ru/u/f9LHodD0cOJCXonOE7L-6d2Cn6Nf_J-C3UZZcRvgBYKgweEdzWz5XIKUxtk" target="_blank" rel="noopener">Спросить про этот матрас</a></div></div>
+        <div class="prod" id="card-balance"><img src="img/ultra-balance.webp" alt="Матрас ULTRA Баланс" loading="lazy"><div class="prod-body"><h3>ULTRA Баланс</h3><p class="price">35 000 ₽</p><p class="tag">Цена за 160×200, другой размер под заказ</p><p class="tag">+ хлопковый чехол в подарок</p><a class="btn" href="https://max.ru/u/f9LHodD0cOJCXonOE7L-6d2Cn6Nf_J-C3UZZcRvgBYKgweEdzWz5XIKUxtk" target="_blank" rel="noopener">Спросить про этот матрас</a></div></div>
+        <div class="prod" id="card-optima"><img src="img/platinum-optima.webp" alt="Матрас PLATINUM Оптима" loading="lazy"><div class="prod-body"><h3>PLATINUM Оптима</h3><p class="price">45 300 ₽</p><p class="tag">Цена за 160×200, другой размер под заказ</p><p class="tag">+ ортопедическая подушка в подарок</p><a class="btn" href="https://max.ru/u/f9LHodD0cOJCXonOE7L-6d2Cn6Nf_J-C3UZZcRvgBYKgweEdzWz5XIKUxtk" target="_blank" rel="noopener">Спросить про этот матрас</a></div></div>
+        <div class="prod" id="card-deluxe"><img src="img/platinum-deluxe.webp" alt="Матрас PLATINUM Делюкс" loading="lazy"><div class="prod-body"><h3>PLATINUM Делюкс</h3><p class="price">48 500 ₽</p><p class="tag">Цена за 160×200, другой размер под заказ</p><p class="tag">+ ортопедическая подушка в подарок</p><a class="btn" href="https://max.ru/u/f9LHodD0cOJCXonOE7L-6d2Cn6Nf_J-C3UZZcRvgBYKgweEdzWz5XIKUxtk" target="_blank" rel="noopener">Спросить про этот матрас</a></div></div>
       </div>
     </div>
 
     <div class="pane" data-pane="gzmi">
       <h3 style="margin-bottom:12px">Металлические кровати ГЗМИ</h3>
       <div class="prod-grid">
-        <div class="prod"><img src="img/gzmi-leon.jpg" alt="Кровать Леон" loading="lazy"><div class="prod-body"><h3>Леон</h3><p class="price">от 16 900 ₽</p><a class="btn" href="https://max.ru/u/f9LHodD0cOJCXonOE7L-6d2Cn6Nf_J-C3UZZcRvgBYKgweEdzWz5XIKUxtk" target="_blank" rel="noopener">Спросить про эту кровать</a></div></div>
-        <div class="prod"><img src="img/gzmi-elegia.jpg" alt="Кровать Элегия" loading="lazy"><div class="prod-body"><h3>Элегия</h3><p class="price">от 17 750 ₽</p><a class="btn" href="https://max.ru/u/f9LHodD0cOJCXonOE7L-6d2Cn6Nf_J-C3UZZcRvgBYKgweEdzWz5XIKUxtk" target="_blank" rel="noopener">Спросить про эту кровать</a></div></div>
-        <div class="prod"><img src="img/gzmi-fortuna1.jpg" alt="Кровать Фортуна 1" loading="lazy"><div class="prod-body"><h3>Фортуна 1</h3><p class="price">от 26 500 ₽</p><a class="btn" href="https://max.ru/u/f9LHodD0cOJCXonOE7L-6d2Cn6Nf_J-C3UZZcRvgBYKgweEdzWz5XIKUxtk" target="_blank" rel="noopener">Спросить про эту кровать</a></div></div>
+        <div class="prod"><img src="img/gzmi-leon.webp" alt="Кровать Леон" loading="lazy"><div class="prod-body"><h3>Леон</h3><p class="price">от 16 900 ₽</p><a class="btn" href="https://max.ru/u/f9LHodD0cOJCXonOE7L-6d2Cn6Nf_J-C3UZZcRvgBYKgweEdzWz5XIKUxtk" target="_blank" rel="noopener">Спросить про эту кровать</a></div></div>
+        <div class="prod"><img src="img/gzmi-elegia.webp" alt="Кровать Элегия" loading="lazy"><div class="prod-body"><h3>Элегия</h3><p class="price">от 17 750 ₽</p><a class="btn" href="https://max.ru/u/f9LHodD0cOJCXonOE7L-6d2Cn6Nf_J-C3UZZcRvgBYKgweEdzWz5XIKUxtk" target="_blank" rel="noopener">Спросить про эту кровать</a></div></div>
+        <div class="prod"><img src="img/gzmi-fortuna1.webp" alt="Кровать Фортуна 1" loading="lazy"><div class="prod-body"><h3>Фортуна 1</h3><p class="price">от 26 500 ₽</p><a class="btn" href="https://max.ru/u/f9LHodD0cOJCXonOE7L-6d2Cn6Nf_J-C3UZZcRvgBYKgweEdzWz5XIKUxtk" target="_blank" rel="noopener">Спросить про эту кровать</a></div></div>
         <div class="prod"><div class="tint"></div><div class="prod-body"><h3>Венера 4 лайт</h3><p class="price">от 27 750 ₽</p><a class="btn" href="https://max.ru/u/f9LHodD0cOJCXonOE7L-6d2Cn6Nf_J-C3UZZcRvgBYKgweEdzWz5XIKUxtk" target="_blank" rel="noopener">Спросить про эту кровать</a></div></div>
         <div class="prod"><div class="tint"></div><div class="prod-body"><h3>Фортуна 4 лайт</h3><p class="price">от 27 750 ₽</p><a class="btn" href="https://max.ru/u/f9LHodD0cOJCXonOE7L-6d2Cn6Nf_J-C3UZZcRvgBYKgweEdzWz5XIKUxtk" target="_blank" rel="noopener">Спросить про эту кровать</a></div></div>
       </div>
@@ -373,9 +432,9 @@ footer p{margin-bottom:8px;font-size:15px}
     <div class="pane" data-pane="tsar">
       <h3 style="margin-bottom:12px">Матрасы «Царские перины»</h3>
       <div class="prod-grid">
-        <div class="prod" id="card-klassik"><img src="img/perina-klassik.jpg" alt="Матрас Опал Классик Прайм" loading="lazy"><div class="prod-body"><h3>Опал Классик Прайм</h3><p class="price">от 12 400 ₽</p><a class="btn" href="https://max.ru/u/f9LHodD0cOJCXonOE7L-6d2Cn6Nf_J-C3UZZcRvgBYKgweEdzWz5XIKUxtk" target="_blank" rel="noopener">Спросить про этот матрас</a></div></div>
-        <div class="prod" id="card-korall"><img src="img/perina-korall.jpg" alt="Матрас Коралл Микс Прайм" loading="lazy"><div class="prod-body"><h3>Коралл Микс Прайм</h3><p class="price">от 15 450 ₽</p><a class="btn" href="https://max.ru/u/f9LHodD0cOJCXonOE7L-6d2Cn6Nf_J-C3UZZcRvgBYKgweEdzWz5XIKUxtk" target="_blank" rel="noopener">Спросить про этот матрас</a></div></div>
-        <div class="prod" id="card-optima-praim"><img src="img/perina-optima-praim.jpg" alt="Матрас Опал Оптима Прайм" loading="lazy"><div class="prod-body"><h3>Опал Оптима Прайм</h3><p class="price">от 16 400 ₽</p><a class="btn" href="https://max.ru/u/f9LHodD0cOJCXonOE7L-6d2Cn6Nf_J-C3UZZcRvgBYKgweEdzWz5XIKUxtk" target="_blank" rel="noopener">Спросить про этот матрас</a></div></div>
+        <div class="prod" id="card-klassik"><img src="img/perina-klassik.webp" alt="Матрас Опал Классик Прайм" loading="lazy"><div class="prod-body"><h3>Опал Классик Прайм</h3><p class="price">от 12 400 ₽</p><a class="btn" href="https://max.ru/u/f9LHodD0cOJCXonOE7L-6d2Cn6Nf_J-C3UZZcRvgBYKgweEdzWz5XIKUxtk" target="_blank" rel="noopener">Спросить про этот матрас</a></div></div>
+        <div class="prod" id="card-korall"><img src="img/perina-korall.webp" alt="Матрас Коралл Микс Прайм" loading="lazy"><div class="prod-body"><h3>Коралл Микс Прайм</h3><p class="price">от 15 450 ₽</p><a class="btn" href="https://max.ru/u/f9LHodD0cOJCXonOE7L-6d2Cn6Nf_J-C3UZZcRvgBYKgweEdzWz5XIKUxtk" target="_blank" rel="noopener">Спросить про этот матрас</a></div></div>
+        <div class="prod" id="card-optima-praim"><img src="img/perina-optima-praim.webp" alt="Матрас Опал Оптима Прайм" loading="lazy"><div class="prod-body"><h3>Опал Оптима Прайм</h3><p class="price">от 16 400 ₽</p><a class="btn" href="https://max.ru/u/f9LHodD0cOJCXonOE7L-6d2Cn6Nf_J-C3UZZcRvgBYKgweEdzWz5XIKUxtk" target="_blank" rel="noopener">Спросить про этот матрас</a></div></div>
         <div class="prod" id="card-opal-optima"><div class="tint"></div><div class="prod-body"><h3>Опал Оптима</h3><p class="price">от 20 300 ₽</p><a class="btn" href="https://max.ru/u/f9LHodD0cOJCXonOE7L-6d2Cn6Nf_J-C3UZZcRvgBYKgweEdzWz5XIKUxtk" target="_blank" rel="noopener">Спросить про этот матрас</a></div></div>
         <div class="prod" id="card-lait"><div class="tint"></div><div class="prod-body"><h3>Лайт Микс</h3><p class="price">от 30 800 ₽</p><a class="btn" href="https://max.ru/u/f9LHodD0cOJCXonOE7L-6d2Cn6Nf_J-C3UZZcRvgBYKgweEdzWz5XIKUxtk" target="_blank" rel="noopener">Спросить про этот матрас</a></div></div>
       </div>
@@ -384,7 +443,7 @@ footer p{margin-bottom:8px;font-size:15px}
     <div class="pane" data-pane="sleep">
       <h3 style="margin:4px 0 12px">Подушки</h3>
       <div class="prod-grid">
-        <div class="prod"><img src="img/IMG_9525.jpg" alt="Подушки в зале" loading="lazy"><div class="prod-body"><h3>Ортопедическая Memory Max</h3><p class="price">3 600 ₽</p><a class="btn" href="https://max.ru/u/f9LHodD0cOJCXonOE7L-6d2Cn6Nf_J-C3UZZcRvgBYKgweEdzWz5XIKUxtk" target="_blank" rel="noopener">Спросить</a></div></div>
+        <div class="prod"><img src="img/IMG_9525.webp" alt="Подушки в зале" loading="lazy"><div class="prod-body"><h3>Ортопедическая Memory Max</h3><p class="price">3 600 ₽</p><a class="btn" href="https://max.ru/u/f9LHodD0cOJCXonOE7L-6d2Cn6Nf_J-C3UZZcRvgBYKgweEdzWz5XIKUxtk" target="_blank" rel="noopener">Спросить</a></div></div>
         <div class="prod"><div class="tint"></div><div class="prod-body"><h3>Мемори Классик</h3><p class="price">3 600 ₽</p><a class="btn" href="https://max.ru/u/f9LHodD0cOJCXonOE7L-6d2Cn6Nf_J-C3UZZcRvgBYKgweEdzWz5XIKUxtk" target="_blank" rel="noopener">Спросить</a></div></div>
         <div class="prod"><div class="tint"></div><div class="prod-body"><h3>Organic Pro</h3><p class="price">6 700 ₽</p><a class="btn" href="https://max.ru/u/f9LHodD0cOJCXonOE7L-6d2Cn6Nf_J-C3UZZcRvgBYKgweEdzWz5XIKUxtk" target="_blank" rel="noopener">Спросить</a></div></div>
       </div>
@@ -409,7 +468,7 @@ footer p{margin-bottom:8px;font-size:15px}
     <h2>Акции и комплекты</h2>
     <div class="promo-row">
       <div class="promo">
-        <div class="promo-img"><img src="img/salon-svetly.jpg" alt="Комплект кровать и матрас в зале" loading="lazy"><span class="promo-date">до 31 октября</span></div>
+        <div class="promo-img"><img src="img/salon-svetly.webp" alt="Комплект кровать и матрас в зале" loading="lazy"><span class="promo-date">до 31 октября</span></div>
         <div class="promo-body">
           <h3>Комплект: кровать + матрас «Тиффани»</h3>
           <span class="lbl">Цена по акции</span>
@@ -418,7 +477,7 @@ footer p{margin-bottom:8px;font-size:15px}
         </div>
       </div>
       <div class="promo">
-        <div class="promo-img"><img src="img/IMG_9480.jpg" alt="Зал магазина с кроватями" loading="lazy"><span class="promo-date">до 31 октября</span></div>
+        <div class="promo-img"><img src="img/IMG_9480.webp" alt="Зал магазина с кроватями" loading="lazy"><span class="promo-date">до 31 октября</span></div>
         <div class="promo-body">
           <h3>Комплект: кровать + матрас «Велла»</h3>
           <span class="lbl">Цена по акции</span>
@@ -434,13 +493,13 @@ footer p{margin-bottom:8px;font-size:15px}
 <section id="inside">
   <div class="wrap">
     <h2>Открытый состав</h2>
-    <div class="hero-grid">
+    <div>
       <figure class="inside-img">
-        <img src="img/razrez-favorit.jpg" alt="Матрас CARBON Фаворит в разрезе" loading="lazy">
+        <img src="img/razrez-favorit.webp" alt="Матрас CARBON Фаворит в разрезе" loading="lazy">
         <figcaption>Типовой состав модели «CARBON Фаворит»</figcaption>
       </figure>
       <div>
-        <ul class="layers">
+        <ul class="layers layers-2col">
           <li><b>Чехол</b><span>жаккард, стёганный на синтепоне, съёмный на молнии. Можно снять и постирать</span></li>
           <li><b>Комфортный слой</b><span>натуральный латекс, 3 см, плотность 65 кг/м³. Мягко пружинит, не даёт проваливаться</span></li>
           <li><b>Ортопедический слой</b><span>кокосовая койра, 1 см, плотность 1200 г/м². Даёт жёсткость, держит спину</span></li>
@@ -457,8 +516,13 @@ footer p{margin-bottom:8px;font-size:15px}
 <section id="how">
   <div class="wrap">
     <h2>Как подбираем матрас</h2>
-    <p style="max-width:640px">Сначала спрашиваем рост и вес каждого, кто будет спать, и считаем нагрузку на пружинный блок. Потом сужаем выбор до 2-3 моделей по привычной жёсткости. Дальше вы ложитесь на каждый матрас в зале на 2-3 минуты: жёсткость проверяется спиной, а не глазами. После покупки договариваемся о дате, привозим, заносим в квартиру и ставим на место.</p>
-    <p style="margin-top:12px"><a href="#quiz" style="color:var(--purple);font-weight:600">Или пройдите подбор в квизе за 2 минуты</a></p>
+    <div class="steps">
+      <div class="step"><span class="num">1</span><b>Рост и вес</b><p>Считаем нагрузку на пружинный блок для каждого спящего.</p></div>
+      <div class="step"><span class="num">2</span><b>Жёсткость</b><p>Сужаем выбор до 2-3 моделей по привычной жёсткости.</p></div>
+      <div class="step"><span class="num">3</span><b>Бюджет</b><p>Называем цену сразу, без «оставьте заявку».</p></div>
+      <div class="step"><span class="num">4</span><b>Проверка спиной</b><p>В зале ложитесь на каждый вариант на 2-3 минуты. Покупать не обязательно.</p></div>
+    </div>
+    <p style="margin-top:16px"><a href="#quiz" style="color:var(--purple);font-weight:600">Или пройдите подбор в квизе за 2 минуты</a></p>
   </div>
 </section>
 
@@ -483,7 +547,7 @@ footer p{margin-bottom:8px;font-size:15px}
         <h3>Гарантия</h3>
         <div class="dlv-row"><span>Матрасы</span><span>18 месяцев от фабрики</span></div>
         <div class="dlv-row"><span>Кровати</span><span>18 месяцев</span></div>
-        <div class="dlv-row"><span>Решаем сами</span><span>без колл-центра в другом городе</span></div>
+        <div class="dlv-row"><span>Гарантийный случай</span><span>решаем в зале, на месте</span></div>
       </div>
     </div>
   </div>
@@ -505,9 +569,9 @@ footer p{margin-bottom:8px;font-size:15px}
   <div class="wrap">
     <h2>Команда</h2>
     <div class="team">
-      <div class="tm"><img src="img/IMG_0585.jpg" alt="Захар в зале" loading="lazy"><div class="tm-body"><h3>Захар</h3><p class="role">продавец</p><p>Стаж более 3 лет, обучение на фабрике «Корона».</p></div></div>
-      <div class="tm"><img src="img/IMG_0590.jpg" alt="Елена в зале" loading="lazy"><div class="tm-body"><h3>Елена</h3><p class="role">продавец</p><p>Стаж более 3 лет, обучение на фабрике «Корона».</p></div></div>
-      <div class="tm"><img src="img/IMG_0595.jpg" alt="Неля в зале" loading="lazy"><div class="tm-body"><h3>Неля</h3><p class="role">продавец</p><p>Ведёт группу ВКонтакте, отвечает на вопросы в переписке.</p></div></div>
+      <div class="tm"><img src="img/IMG_0585.webp" alt="Захар в зале" loading="lazy"><div class="tm-body"><h3>Захар</h3><p class="role">продавец</p><p>Стаж более 3 лет, обучение на фабрике «Корона».</p></div></div>
+      <div class="tm"><img src="img/IMG_0590.webp" alt="Елена в зале" loading="lazy"><div class="tm-body"><h3>Елена</h3><p class="role">продавец</p><p>Стаж более 3 лет, обучение на фабрике «Корона».</p></div></div>
+      <div class="tm"><img src="img/IMG_0595.webp" alt="Неля в зале" loading="lazy"><div class="tm-body"><h3>Неля</h3><p class="role">продавец</p><p>Ведёт группу ВКонтакте, отвечает на вопросы в переписке.</p></div></div>
     </div>
   </div>
 </section>
@@ -531,8 +595,8 @@ footer p{margin-bottom:8px;font-size:15px}
     <p>Оренбург, Терешковой 281/3, Большой мебельный базар. Два зала: место 53 и место 40. Работаем 10:00-20:00, без перерывов и выходных.</p>
     <div class="map-static"><div class="pin"></div><p>Терешковой 281/3, БМБ</p></div>
     <div class="find-grid">
-      <figure><img src="img/salon-stoyka.jpg" alt="Вход в зал Корона" loading="lazy"><figcaption>Вход в зал, стойка с логотипом</figcaption></figure>
-      <figure><img src="img/IMG_9495.jpg" alt="Коридор ТЦ к местам 53 и 40" loading="lazy"><figcaption>Коридор к местам 53 и 40</figcaption></figure>
+      <figure><img src="img/salon-stoyka.webp" alt="Вход в зал Корона" loading="lazy"><figcaption>Вход в зал, стойка с логотипом</figcaption></figure>
+      <figure><img src="img/IMG_9495.webp" alt="Коридор ТЦ к местам 53 и 40" loading="lazy"><figcaption>Коридор к местам 53 и 40</figcaption></figure>
     </div>
     <div class="btn-col">
       <a class="btn ghost" href="https://yandex.ru/maps/?text=Оренбург, Терешковой 281/3" target="_blank" rel="noopener">Построить маршрут</a>
@@ -544,18 +608,18 @@ footer p{margin-bottom:8px;font-size:15px}
 <!-- 13. Финал -->
 <section id="final">
   <div class="wrap">
-    <h2>Остался один шаг: напишите нам</h2>
-    <p>Напишите в мессенджер: подберём модель под ваш рост и вес, скажем цену и наличие. Или оставьте телефон, перезвоним.</p>
-    <div class="btn-col">
-      <a class="btn fill" href="https://max.ru/u/f9LHodD0cOJCXonOE7L-6d2Cn6Nf_J-C3UZZcRvgBYKgweEdzWz5XIKUxtk" target="_blank" rel="noopener">Написать в MAX</a>
-      <a class="btn" href="https://wa.me/79033980560?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%BF%D0%BE%D0%B4%D0%BE%D0%B1%D1%80%D0%B0%D1%82%D1%8C%20%D0%BC%D0%B0%D1%82%D1%80%D0%B0%D1%81." target="_blank" rel="noopener">Написать в WhatsApp</a>
-    </div>
-    <form id="finalForm" style="margin-top:16px;max-width:520px" novalidate>
-      <div class="field"><input type="text" id="fName" placeholder="Имя"></div>
-      <div class="field"><input type="tel" id="fPhone" inputmode="tel" placeholder="Телефон"></div>
+    <h2>Перезвоним и назовём цену</h2>
+    <p>Один звонок в рабочее время: скажем цену, наличие и срок.</p>
+    <form id="finalForm" class="final-form" novalidate>
+      <div class="field">
+        <label for="fPhone">Телефон</label>
+        <input type="tel" id="fPhone" inputmode="tel" autocomplete="tel" required placeholder="+7 ___ ___-__-__">
+      </div>
       <button class="btn fill" type="submit">Перезвоните мне</button>
+      <p class="consent">Нажимая кнопку, вы соглашаетесь с <a href="privacy.html" target="_blank" rel="noopener">политикой обработки данных</a>.</p>
       <p class="form-msg" id="finalMsg"></p>
     </form>
+    <p class="small" style="margin-top:16px">Удобнее в переписке? Иконка MAX наверху страницы или кнопка в квизе.</p>
   </div>
 </section>
 
@@ -566,7 +630,7 @@ footer p{margin-bottom:8px;font-size:15px}
     <p><strong>БМБ: кровати и матрасы</strong><br><span class="small">магазин фабрики Корона</span></p>
     <p>Телефон: <a href="tel:+79033980560">+7 (903) 398-05-60</a></p>
     <p class="small">Оренбург, Терешковой 281/3, БМБ, места 53 и 40 · 10:00-20:00, без перерывов и выходных</p>
-    <p class="small"><a href="#" id="policyLink">Политика обработки персональных данных</a></p>
+    <p class="small"><a href="privacy.html" target="_blank" rel="noopener" id="policyLink">Политика обработки персональных данных</a></p>
     <p class="small">© 2026</p>
   </div>
 </footer>
@@ -595,11 +659,22 @@ var quiz = {code:null, step:1, answers:{}};
 try{ var saved = JSON.parse(localStorage.getItem(LS_KEY) || 'null'); if(saved && saved.code){ quiz = saved; } }catch(e){}
 function genCode(){
   var L = 'АВГДЕЖЗИКЛМН'.charAt(Math.floor(Math.random()*12));
-  return L + '-' + (100 + Math.floor(Math.random()*900));
+  return L + (100 + Math.floor(Math.random()*900));
 }
 if(!quiz.code){ quiz.code = genCode(); saveQuiz(); }
 function saveQuiz(){ try{ localStorage.setItem(LS_KEY, JSON.stringify(quiz)); }catch(e){} }
-document.getElementById('quizCode').textContent = quiz.code;
+
+/* Код финала собирается из ответов: К633-2-178-92-Ж */
+var WHO_D = {'Один':'1','Вдвоём':'2','С ребёнком':'3'};
+var FIRM_D = {'Мягкий':'М','Средний':'С','Жёсткий':'Ж','Не знаю':'Н'};
+function fullCode(){
+  var c = quiz.code;
+  c += '-' + (WHO_D[quiz.answers.who] || '0');
+  c += '-' + (quiz.answers.height && quiz.answers.height !== 'не указан' ? quiz.answers.height : '0');
+  c += '-' + (quiz.answers.weight && quiz.answers.weight !== 'не указан' ? quiz.answers.weight : '0');
+  c += '-' + (FIRM_D[quiz.answers.firm] || '0');
+  return c;
+}
 
 function showStep(n){
   quiz.step = n; saveQuiz();
@@ -609,6 +684,10 @@ function showStep(n){
   document.querySelectorAll('.quiz-bar i').forEach(function(bar, i){ bar.classList.toggle('done', i < Math.min(n,4)); });
   if(n === 5) renderFinal();
 }
+
+document.querySelectorAll('.quiz-back').forEach(function(btn){
+  btn.addEventListener('click', function(){ showStep(+btn.dataset.back); });
+});
 
 document.querySelectorAll('.opt').forEach(function(btn){
   btn.addEventListener('click', function(){
@@ -630,8 +709,7 @@ document.getElementById('step2Skip').addEventListener('click', function(){
 var RECO = {
   'До 20 тыс':     [['Опал Классик Прайм','12 400','#card-klassik'],['Коралл Микс Прайм','15 450','#card-korall'],['Опал Оптима Прайм','16 400','#card-optima-praim']],
   '20-35 тыс':     [['CARBON Спарк','20 100','#card-spark'],['CARBON Фэмили','21 000','#card-family'],['CARBON Фаворит','24 100','#card-favorit']],
-  '35-50 тыс':     [['ULTRA Баланс','35 000','#card-balance'],['PLATINUM Оптима','45 300','#card-optima']],
-  'Дороже 50 тыс': [['PLATINUM Делюкс','48 500','#card-deluxe'],['PLATINUM Оптима','45 300','#card-optima']],
+  '35-50 тыс':     [['ULTRA Баланс','35 000','#card-balance'],['PLATINUM Оптима','45 300','#card-optima'],['PLATINUM Делюкс','48 500','#card-deluxe']],
   'Не важно':      [['CARBON Фаворит','24 100','#card-favorit'],['ULTRA Баланс','35 000','#card-balance'],['PLATINUM Оптима','45 300','#card-optima']]
 };
 function renderFinal(){
@@ -654,26 +732,32 @@ function renderFinal(){
     });
     box.appendChild(a);
   });
-  var text = 'Здравствуйте! Код подбора: ' + quiz.code +
+  var code = fullCode();
+  document.getElementById('quizCode').textContent = code;
+  var text = 'Здравствуйте! Код подбора: ' + code +
     '. Спит: ' + (quiz.answers.who || 'нет ответа') +
     ', рост/вес: ' + quiz.answers.height + '/' + quiz.answers.weight +
     ', жёсткость: ' + (quiz.answers.firm || 'нет ответа') +
     ', бюджет: ' + (quiz.answers.budget || 'нет ответа') +
     '. Хочу узнать наличие и цену.';
   document.getElementById('quizWaBtn').href = 'https://wa.me/79033980560?text=' + encodeURIComponent(text);
-  document.getElementById('quizMaxBtn').href = MAX_URL + '?text=' + encodeURIComponent(text);
+  var maxBtn = document.getElementById('quizMaxBtn');
+  maxBtn.onclick = function(){
+    var done = function(){ window.open(MAX_URL, '_blank', 'noopener'); };
+    var msg = document.getElementById('quizCopyMsg');
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(function(){
+        msg.style.color = ''; msg.textContent = 'Подбор скопирован. Вставьте его в сообщение в MAX.';
+        done();
+      }, function(){ msg.style.color = '#B3402E'; msg.textContent = 'Не скопировалось. Выделите код и перепишите вручную.'; done(); });
+    }else{
+      msg.textContent = 'Перепишите код ' + code + ' в сообщение.';
+      done();
+    }
+  };
 }
 
-/* Кнопки товаров: чат открывается с готовым сообщением про модель */
-document.querySelectorAll('.prod').forEach(function(card){
-  var t = card.querySelector('h3');
-  var p = card.querySelector('.price');
-  var a = card.querySelector('a.btn[href*="max.ru"]');
-  if(!t || !a) return;
-  var msg = 'Здравствуйте! Интересует ' + t.textContent.replace(/\s+/g,' ').trim() +
-    (p ? ' (' + p.textContent.trim() + ')' : '') + '. Есть в наличии?';
-  a.href = a.href.split('?')[0] + '?text=' + encodeURIComponent(msg);
-});
+/* Кнопки товаров ведут в профиль MAX: у профиля подстановки текста нет, поэтому текст не дописываем */
 (function(){
   var answered = 0;
   if(quiz.answers.who) answered = 1;
@@ -683,39 +767,58 @@ document.querySelectorAll('.prod').forEach(function(card){
   showStep(Math.min(answered + 1, 5));
 })();
 
-/* Формы перезвона (пока локально, бэкенд подключим на сервере) */
-function bindCallback(btnId, phoneId, msgId, nameId){
-  var btn = document.getElementById(btnId);
-  if(!btn) return;
-  btn.addEventListener('click', function(e){
-    e.preventDefault();
-    var phone = document.getElementById(phoneId).value.trim();
-    var name = nameId ? document.getElementById(nameId).value.trim() : '';
-    var msg = document.getElementById(msgId);
-    if(!phone){ msg.style.color = '#B3402E'; msg.textContent = 'Напишите телефон, иначе не перезвоним.'; return; }
-    try{
-      var log = JSON.parse(localStorage.getItem('korona_callbacks') || '[]');
-      log.push({name:name, phone:phone, code:quiz.code, ts:new Date().toISOString()});
-      localStorage.setItem('korona_callbacks', JSON.stringify(log));
-    }catch(e2){}
-    msg.style.color = ''; msg.textContent = 'Принято. Перезвоним по номеру ' + phone + '.';
-    btn.disabled = true;
-  });
+/* Формы перезвона: POST на адрес приёма заявок. Пока адреса нет, ведём честно в мессенджер с готовым текстом */
+var LEAD_URL = ''; /* сюда вставить адрес приёма заявок от заказчика */
+
+function utm(){
+  var out = {};
+  location.search.replace(/[?&](utm_[^=&]+)=([^&]*)/g, function(m,k,v){ out[k] = decodeURIComponent(v); });
+  return out;
 }
-bindCallback('heroPhoneSubmit', 'heroPhone', 'heroPhoneMsg');
+function validPhone(p){
+  var d = p.replace(/\D/g,'');
+  return d.length >= 10 && d.length <= 12;
+}
+function sendLead(payload, msgEl, btn, okText){
+  if(!validPhone(payload.phone)){
+    msgEl.style.color = '#B3402E';
+    msgEl.textContent = 'Проверьте номер: нужны 10-11 цифр, например +7 903 123-45-67.';
+    return;
+  }
+  payload.code = quiz.code;
+  payload.utm = utm();
+  payload.page = location.href;
+  if(!LEAD_URL){
+    /* Приём заявок ещё не подключён: не врём про «принято», ведём в мессенджер с готовым текстом */
+    var text = 'Здравствуйте! Прошу перезвонить: ' + payload.phone + (payload.name ? ', ' + payload.name : '') + '. Код подбора: ' + quiz.code + '.';
+    msgEl.style.color = '';
+    msgEl.innerHTML = 'Заявки с сайта пока принимает продавец в мессенджере. <a href="https://wa.me/79033980560?text=' + encodeURIComponent(text) + '" target="_blank" rel="noopener" style="color:var(--purple);font-weight:600">Отправить номер в WhatsApp</a>, текст уже готов.';
+    return;
+  }
+  btn.disabled = true;
+  fetch(LEAD_URL, {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload)})
+    .then(function(r){
+      if(!r.ok) throw new Error('bad');
+      msgEl.style.color = ''; msgEl.textContent = okText;
+    })
+    .catch(function(){
+      btn.disabled = false;
+      msgEl.style.color = '#B3402E';
+      msgEl.textContent = 'Заявка не ушла: проблема со связью. Позвоните нам: +7 (903) 398-05-60.';
+    });
+}
+
+document.getElementById('heroForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  sendLead({phone:document.getElementById('heroPhone').value.trim(), source:'hero'},
+    document.getElementById('heroPhoneMsg'), document.getElementById('heroPhoneSubmit'),
+    'Принято. Перезвоним в рабочее время 10:00-20:00.');
+});
 document.getElementById('finalForm').addEventListener('submit', function(e){
   e.preventDefault();
-  var name = document.getElementById('fName').value.trim();
-  var phone = document.getElementById('fPhone').value.trim();
-  var msg = document.getElementById('finalMsg');
-  if(!phone){ msg.style.color = '#B3402E'; msg.textContent = 'Напишите телефон, иначе не перезвоним.'; return; }
-  try{
-    var log = JSON.parse(localStorage.getItem('korona_callbacks') || '[]');
-    log.push({name:name, phone:phone, code:quiz.code, source:'final', ts:new Date().toISOString()});
-    localStorage.setItem('korona_callbacks', JSON.stringify(log));
-  }catch(e2){}
-  msg.style.color = ''; msg.textContent = 'Принято' + (name ? ', ' + name : '') + '. Перезвоним по номеру ' + phone + '.';
-  this.querySelector('button[type="submit"]').disabled = true;
+  sendLead({phone:document.getElementById('fPhone').value.trim(), source:'final'},
+    document.getElementById('finalMsg'), this.querySelector('button[type="submit"]'),
+    'Принято. Перезвоним в рабочее время 10:00-20:00.');
 });
 </script>
 </body>
