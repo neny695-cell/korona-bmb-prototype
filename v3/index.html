@@ -5,6 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>БМБ: кровати и матрасы — магазин фабрики Корона в Оренбурге</title>
 <meta name="description" content="Фирменный магазин Корона на Большом мебельном базаре, Оренбург. Подбираем матрас под рост и вес, называем цену сразу. Комплекты кровать + матрас от 27 000 ₽.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="БМБ: кровати и матрасы, магазин фабрики Корона в Оренбурге">
+<meta property="og:description" content="Подберём матрас под рост и вес. Зал на Большом мебельном базаре, Терешковой 281/3.">
+<meta property="og:image" content="https://neny695-cell.github.io/korona-bmb-prototype/v3/img/IMG_9470.jpg">
+<meta property="og:url" content="https://neny695-cell.github.io/korona-bmb-prototype/v3/">
+<link rel="canonical" href="https://neny695-cell.github.io/korona-bmb-prototype/v3/">
 <style>
 :root{
   --purple:#6B3A5C; --purple-dark:#4E2A43; --purple-tint:#F4EDF1; --purple-ghost:#E3D4DE;
@@ -195,8 +201,8 @@ footer p{margin-bottom:8px;font-size:15px}
 .brand-img{height:30px;width:auto;mix-blend-mode:multiply}
 .brand-sep{width:1px;height:28px;background:var(--line);flex:none}
 .hdr-max{display:flex;align-items:center;justify-content:center;width:40px;height:40px;
-  border-radius:11px;background:var(--purple);color:#fff;text-decoration:none;flex:none}
-.hdr-max span{font:700 11px/1 Arial,Helvetica,sans-serif;letter-spacing:.6px}
+  border-radius:11px;background:var(--surface);border:1px solid var(--line);text-decoration:none;flex:none;overflow:hidden}
+.hdr-max img{width:30px;height:30px;mix-blend-mode:multiply}
 
 /* Первый экран: новая сетка */
 .hero2{display:grid;gap:20px}
@@ -207,8 +213,9 @@ footer p{margin-bottom:8px;font-size:15px}
   background:var(--surface);border:1px solid var(--line);border-radius:14px;
   text-decoration:none;color:var(--ink);font-size:16px;font-weight:600}
 .max-card:hover{border-color:var(--purple);background:var(--purple-tint)}
-.max-card .ic{display:flex;align-items:center;justify-content:center;width:40px;height:40px;
-  border-radius:11px;background:var(--purple);color:#fff;font:700 11px/1 Arial,Helvetica,sans-serif;letter-spacing:.6px;flex:none}
+.max-card .ic{display:flex;align-items:center;justify-content:center;width:44px;height:44px;
+  border-radius:11px;background:var(--bg);border:1px solid var(--line);flex:none}
+.max-card .ic img{width:32px;height:32px;mix-blend-mode:multiply}
 .hero-form{display:grid;grid-template-columns:1fr;gap:6px 16px;align-items:end;
   margin-top:24px;padding:18px 20px;background:var(--surface);
   border:1px solid var(--line);border-radius:14px}
@@ -235,6 +242,54 @@ footer p{margin-bottom:8px;font-size:15px}
 .consent{font-size:13px;color:var(--ink2)}
 .consent a{color:var(--purple)}
 
+/* Первый экран: фото наверх */
+.hero-photo{margin:0 0 24px}
+.hero-photo img{width:100%;height:430px;object-fit:cover;border-radius:16px}
+.hero-photo figcaption{margin-top:10px;font-size:14px;color:var(--ink2);line-height:1.5;max-width:760px}
+@media(max-width:899px){
+  .hero-photo{margin:0 0 20px}
+  .hero-photo img{height:250px;border-radius:12px}
+}
+.hero-cta{display:grid;gap:12px;margin-top:22px}
+@media(min-width:900px){.hero-cta{grid-template-columns:minmax(0,1fr) 1.4fr;align-items:stretch}}
+.hero-form{margin-top:0}
+
+/* Шапка v2 */
+.hdr-in{height:64px}
+.hdr-nav{display:none;gap:18px}
+.hdr-nav a{text-decoration:none;color:var(--ink2);font-size:14px;font-weight:600}
+.hdr-nav a:hover{color:var(--purple)}
+.hdr-icons{display:flex;align-items:center;gap:8px}
+.hdr-ico{display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:11px;background:var(--surface);border:1px solid var(--line);flex:none}
+.hdr-ico img{width:24px;height:24px}
+.hdr-tel{font-weight:600;text-decoration:none;color:var(--ink);font-size:15px;white-space:nowrap;margin-right:4px}
+@media(min-width:900px){.hdr-nav{display:flex}}
+@media(max-width:560px){.hdr-tel{display:none}}
+.brand-img{height:32px}
+
+/* Подвал v2 */
+footer{background:var(--purple-dark);color:#fff;padding:36px 0;margin-top:20px}
+footer .f-badge{display:inline-block;background:#fff;color:var(--purple);font-size:11px;font-weight:700;letter-spacing:.08em;padding:6px 10px;border-radius:8px;margin-bottom:12px}
+footer a{color:#E9D7E3}
+footer p{margin-bottom:8px;font-size:15px}
+.f-cols{display:grid;gap:22px;margin:18px 0}
+@media(min-width:768px){.f-cols{grid-template-columns:repeat(3,1fr)}}
+.f-cols h3{font-size:15px;margin-bottom:10px}
+.f-cols a{display:block;text-decoration:none;margin-bottom:6px;font-size:14px}
+.f-bottom{border-top:1px solid rgba(255,255,255,.2);padding-top:14px;font-size:13px;color:#CBB3C6}
+
+/* Cookie-плашка */
+.cookie{position:fixed;left:12px;right:12px;bottom:78px;z-index:60;background:var(--ink);color:#fff;border-radius:12px;padding:14px 16px;font-size:13px;line-height:1.5;display:none;gap:10px;align-items:center}
+.cookie.show{display:flex}
+.cookie a{color:#E9D7E3}
+.cookie button{flex:none;background:#fff;color:var(--ink);border:none;border-radius:8px;padding:8px 14px;font-weight:600;cursor:pointer;font-family:inherit}
+@media(min-width:768px){.cookie{left:auto;right:20px;bottom:20px;max-width:380px}}
+
+/* Галочка согласия */
+.agree{display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--ink2)}
+.agree input{margin-top:3px}
+.agree a{color:var(--purple)}
+
 /* Квиз: кнопка назад */
 .quiz-back{background:none;border:none;color:var(--ink2);text-decoration:underline;font-size:14px;cursor:pointer;font-family:inherit;padding:8px 0;margin-top:6px}
 </style>
@@ -250,45 +305,57 @@ footer p{margin-bottom:8px;font-size:15px}
       <span class="brand-sep" aria-hidden="true"></span>
       <div>
         <div class="hdr-title">БМБ: кровати и матрасы</div>
-        <div class="hdr-sub">магазин фабрики Корона</div>
       </div>
     </div>
-    <a class="hdr-max" href="https://max.ru/u/f9LHodD0cOJCXonOE7L-6d2Cn6Nf_J-C3UZZcRvgBYKgweEdzWz5XIKUxtk" target="_blank" rel="noopener" aria-label="Написать в MAX"><span>MAX</span></a>
+    <nav class="hdr-nav" aria-label="Разделы">
+      <a href="#catalog">Витрина</a>
+      <a href="#promo">Акции</a>
+      <a href="#reviews">Отзывы</a>
+      <a href="#location">Как найти</a>
+    </nav>
+    <div class="hdr-icons">
+      <a class="hdr-tel" href="tel:+79033980560">+7 (903) 398-05-60</a>
+      <a class="hdr-ico" data-link="max" href="https://max.ru/u/f9LHodD0cOJCXonOE7L-6d2Cn6Nf_J-C3UZZcRvgBYKgweEdzWz5XIKUxtk" target="_blank" rel="noopener" aria-label="Написать в MAX"><img src="img/max-icon.png" alt=""></a>
+      <a class="hdr-ico" data-link="whatsapp" href="https://wa.me/79033980560" target="_blank" rel="noopener" aria-label="Написать в WhatsApp"><svg viewBox="0 0 24 24" width="24" height="24" fill="#25D366" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+      <a class="hdr-ico" data-link="telegram" href="#" target="_blank" rel="noopener" aria-label="Написать в Telegram" hidden><svg viewBox="0 0 24 24" width="24" height="24" fill="#229ED9" aria-hidden="true"><path d="M11.944 0A12 12 0 000 12a12 12 0 0012 12 12 12 0 0012-12A12 12 0 0012 0a12 12 0 00-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 01.171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg></a>
+    </div>
   </div>
 </header>
 
 <!-- 1. Первый экран -->
 <section id="top">
   <div class="wrap">
-    <div class="hero2">
-      <div>
-        <span class="hero-badge">КОРОНА · МЕБЕЛЬНАЯ ФАБРИКА</span>
-        <h1>Матрас под рост и вес, цена сразу</h1>
-        <p class="hero-sub">Фирменный магазин Корона на БМБ, Оренбург</p>
-        <p class="price-badge">Матрасы от 12 400 ₽ · комплекты кровать + матрас от 27 000 ₽</p>
-        <p class="addr">г. Оренбург, Терешковой 281/3, Большой мебельный базар<br>
-        Зал «Фирменный отдел Корона», место 53 · Зал «Отдел нескольких фабрик», место 40<br>
-        Ежедневно 10:00-20:00, без перерывов и выходных</p>
-        <div class="stats">
-          <div class="stat"><b>4,8</b><span>на Яндекс.Картах из 63 оценок</span></div>
-          <div class="stat"><b>10 лет</b><span>в Оренбурге на одном месте</span></div>
-        </div>
-      </div>
-      <div class="hero-side">
-        <img src="img/IMG_9470.webp" alt="Фирменный стенд Корона в ТЦ Большой мебельный базар" fetchpriority="high">
-        <a class="max-card" href="https://max.ru/u/f9LHodD0cOJCXonOE7L-6d2Cn6Nf_J-C3UZZcRvgBYKgweEdzWz5XIKUxtk" target="_blank" rel="noopener">
-          <span class="ic" aria-hidden="true">MAX</span>
-          <span>Написать в MAX<br><span style="font-weight:400;font-size:14px;color:var(--ink2)">Отвечает продавец, не бот</span></span>
-        </a>
+    <figure class="hero-photo">
+      <img src="img/IMG_9470.webp" alt="Зал магазина Корона на Большом мебельном базаре: кровати, матрасы и стойка продавца" fetchpriority="high">
+      <figcaption>Наш зал на Большом мебельном базаре, Терешковой 281/3, место 53. Здесь можно полежать на каждом матрасе и посмотреть ткани вживую.</figcaption>
+    </figure>
+    <!-- Формулировки h1 и подписей нейтральные, ждут замены после интервью с продавцами -->
+    <div class="hero-text">
+      <span class="hero-badge">КОРОНА · МЕБЕЛЬНАЯ ФАБРИКА</span>
+      <h1>Спальное место под ваш рост и вес: кровать, матрас или комплект</h1>
+      <p class="hero-sub">Фирменный магазин Корона на БМБ, Оренбург</p>
+      <p class="price-badge">Матрасы от 12 400 ₽ · комплекты кровать + матрас от 27 000 ₽</p>
+      <p class="addr">г. Оренбург, Терешковой 281/3, Большой мебельный базар<br>
+      Зал «Фирменный отдел Корона», место 53 · Зал «Отдел нескольких фабрик», место 40<br>
+      Ежедневно 10:00-20:00, без перерывов и выходных</p>
+      <div class="stats">
+        <div class="stat"><b>4,8</b><span>на Яндекс.Картах из 63 оценок</span></div>
+        <div class="stat"><b>10 лет</b><span>в Оренбурге на одном месте</span></div>
       </div>
     </div>
-    <form class="hero-form" id="heroForm" novalidate>
-      <label for="heroPhone">Оставьте телефон, перезвоним и назовём цену</label>
-      <input type="tel" id="heroPhone" inputmode="tel" autocomplete="tel" required placeholder="+7 ___ ___-__-__">
-      <button class="btn fill" type="submit" id="heroPhoneSubmit">Перезвоните мне</button>
-      <p class="form-msg" id="heroPhoneMsg" style="grid-column:1/-1"></p>
-      <p class="consent" style="grid-column:1/-1">Нажимая кнопку, вы соглашаетесь с <a href="privacy.html" target="_blank" rel="noopener">политикой обработки данных</a>.</p>
-    </form>
+    <div class="hero-cta">
+      <a class="max-card" href="https://max.ru/u/f9LHodD0cOJCXonOE7L-6d2Cn6Nf_J-C3UZZcRvgBYKgweEdzWz5XIKUxtk" target="_blank" rel="noopener">
+        <span class="ic" aria-hidden="true"><img src="img/max-icon.png" alt=""></span>
+        <span>Написать в MAX<br><span style="font-weight:400;font-size:14px;color:var(--ink2)">Отвечает продавец, не бот</span></span>
+      </a>
+      <form class="hero-form" id="heroForm" novalidate>
+        <label for="heroPhone">Оставьте номер, если удобнее голосом. Перезвоним в рабочее время 10:00-20:00, спросим про рост, вес и жёсткость, предложим 2-3 модели из наличия.</label>
+        <input type="tel" id="heroPhone" inputmode="tel" autocomplete="tel" required placeholder="+7 ___ ___-__-__">
+        <button class="btn fill" type="submit" id="heroPhoneSubmit">Перезвоните мне</button>
+        <p class="form-msg" id="heroPhoneMsg" style="grid-column:1/-1"></p>
+        <label class="agree" style="grid-column:1/-1"><input type="checkbox" id="heroAgree" required checked><span>Согласен с <a href="privacy.html" target="_blank" rel="noopener">политикой обработки данных</a></span></label>
+      </form>
+    </div>
   </div>
 </section>
 
@@ -608,32 +675,64 @@ footer p{margin-bottom:8px;font-size:15px}
 <!-- 13. Финал -->
 <section id="final">
   <div class="wrap">
-    <h2>Перезвоним и назовём цену</h2>
-    <p>Один звонок в рабочее время: скажем цену, наличие и срок.</p>
+    <h2>Удобнее голосом или в переписке?</h2>
+    <p>Перезвоним в рабочее время или ответим в мессенджере. В обоих случаях спросим про рост, вес и жёсткость и предложим 2-3 модели, которые есть в зале.</p>
     <form id="finalForm" class="final-form" novalidate>
       <div class="field">
         <label for="fPhone">Телефон</label>
         <input type="tel" id="fPhone" inputmode="tel" autocomplete="tel" required placeholder="+7 ___ ___-__-__">
       </div>
+      <label class="agree"><input type="checkbox" id="finalAgree" required checked><span>Согласен с <a href="privacy.html" target="_blank" rel="noopener">политикой обработки данных</a></span></label>
       <button class="btn fill" type="submit">Перезвоните мне</button>
-      <p class="consent">Нажимая кнопку, вы соглашаетесь с <a href="privacy.html" target="_blank" rel="noopener">политикой обработки данных</a>.</p>
       <p class="form-msg" id="finalMsg"></p>
     </form>
-    <p class="small" style="margin-top:16px">Удобнее в переписке? Иконка MAX наверху страницы или кнопка в квизе.</p>
+    <p class="small" style="margin:16px 0 8px;text-align:center">или</p>
+    <p style="font-weight:600">Написать в мессенджере</p>
+    <div class="btn-col">
+      <a class="max-card" data-link="max" href="https://max.ru/u/f9LHodD0cOJCXonOE7L-6d2Cn6Nf_J-C3UZZcRvgBYKgweEdzWz5XIKUxtk" target="_blank" rel="noopener"><span class="ic" aria-hidden="true"><img src="img/max-icon.png" alt=""></span><span>MAX</span></a>
+      <a class="max-card" data-link="whatsapp" href="https://wa.me/79033980560" target="_blank" rel="noopener"><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" width="28" height="28" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></span><span>WhatsApp</span></a>
+      <a class="max-card" data-link="telegram" href="#" target="_blank" rel="noopener" hidden><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" width="28" height="28" fill="#229ED9"><path d="M11.944 0A12 12 0 000 12a12 12 0 0012 12 12 12 0 0012-12A12 12 0 0012 0a12 12 0 00-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 01.171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg></span><span>Telegram</span></a>
+    </div>
+    <p class="small" style="margin-top:8px">Отвечает продавец в рабочее время, не бот</p>
   </div>
 </section>
 
 <!-- 14. Подвал -->
 <footer>
   <div class="wrap">
-    <span class="f-badge">КОРОНА</span>
-    <p><strong>БМБ: кровати и матрасы</strong><br><span class="small">магазин фабрики Корона</span></p>
-    <p>Телефон: <a href="tel:+79033980560">+7 (903) 398-05-60</a></p>
-    <p class="small">Оренбург, Терешковой 281/3, БМБ, места 53 и 40 · 10:00-20:00, без перерывов и выходных</p>
-    <p class="small"><a href="privacy.html" target="_blank" rel="noopener" id="policyLink">Политика обработки персональных данных</a></p>
-    <p class="small">© 2026</p>
+    <img src="img/logo-korona.png" alt="Корона" style="height:36px;width:auto;filter:brightness(0) invert(1)">
+    <p style="margin-top:10px"><strong>БМБ: кровати и матрасы</strong>, магазин фабрики Корона</p>
+    <div class="f-cols">
+      <div>
+        <h3>Разделы</h3>
+        <a href="#catalog">Витрина и цены</a>
+        <a href="#promo">Акции и комплекты</a>
+        <a href="#reviews">Отзывы</a>
+        <a href="#quiz">Подбор матраса</a>
+        <a href="#location">Как найти</a>
+      </div>
+      <div>
+        <h3>Контакты</h3>
+        <a href="tel:+79033980560">+7 (903) 398-05-60</a>
+        <p class="small" style="color:#CBB3C6">Оренбург, Терешковой 281/3, БМБ<br>Зал «Фирменный отдел Корона», место 53<br>Зал «Отдел нескольких фабрик», место 40<br>10:00-20:00, без перерывов и выходных</p>
+      </div>
+      <div>
+        <h3>Документы</h3>
+        <a href="privacy.html" target="_blank" rel="noopener">Политика обработки данных</a>
+        <a href="privacy.html" target="_blank" rel="noopener">Возврат и обмен</a>
+        <p class="small" style="color:#CBB3C6">Гарантия 18 месяцев от фабрики</p>
+      </div>
+    </div>
+    <!-- Реквизиты продавца (ИП/ООО, ИНН, ОГРН) ждём от заказчика, вставить здесь -->
+    <div class="f-bottom">© 2026 · Цены на сайте не являются публичной офертой</div>
   </div>
 </footer>
+
+<!-- Cookie-уведомление -->
+<div class="cookie" id="cookieBar" role="dialog" aria-label="Уведомление о cookie">
+  <span>Мы используем cookie, чтобы сайт помнил ваш подбор. <a href="privacy.html" target="_blank" rel="noopener">Подробнее</a></span>
+  <button type="button" id="cookieOk">Понятно</button>
+</div>
 
 <!-- Липкая кнопка -->
 <div class="sticky">
@@ -641,7 +740,31 @@ footer p{margin-bottom:8px;font-size:15px}
 </div>
 
 <script>
-var MAX_URL = 'https://max.ru/u/f9LHodD0cOJCXonOE7L-6d2Cn6Nf_J-C3UZZcRvgBYKgweEdzWz5XIKUxtk';
+var LINKS = {
+  max:      'https://max.ru/u/f9LHodD0cOJCXonOE7L-6d2Cn6Nf_J-C3UZZcRvgBYKgweEdzWz5XIKUxtk',
+  whatsapp: 'https://wa.me/79033980560',
+  telegram: ''   /* адрес ещё не получен, кнопка скрыта */
+};
+document.querySelectorAll('a[href*="max.ru/u/"]').forEach(function(a){ a.href = LINKS.max; });
+document.querySelectorAll('a[href*="wa.me/"]').forEach(function(a){
+  if(a.id === 'quizWaBtn') return; /* у неё свой текст */
+  a.href = LINKS.whatsapp + '?text=' + encodeURIComponent('Здравствуйте! Хочу подобрать матрас.');
+});
+if(LINKS.telegram){
+  document.querySelectorAll('[data-link="telegram"]').forEach(function(a){ a.hidden = false; a.href = LINKS.telegram; });
+}
+var MAX_URL = LINKS.max;
+
+/* Cookie-плашка */
+try{
+  if(!localStorage.getItem('korona_cookie_ok')){
+    document.getElementById('cookieBar').classList.add('show');
+  }
+  document.getElementById('cookieOk').addEventListener('click', function(){
+    localStorage.setItem('korona_cookie_ok','1');
+    document.getElementById('cookieBar').classList.remove('show');
+  });
+}catch(e){}
 
 /* Табы */
 document.querySelectorAll('.tab').forEach(function(btn){
@@ -810,14 +933,22 @@ function sendLead(payload, msgEl, btn, okText){
 
 document.getElementById('heroForm').addEventListener('submit', function(e){
   e.preventDefault();
+  var msgEl = document.getElementById('heroPhoneMsg');
+  if(!document.getElementById('heroAgree').checked){
+    msgEl.style.color = '#B3402E'; msgEl.textContent = 'Нужно согласие на обработку данных, поставьте галочку.'; return;
+  }
   sendLead({phone:document.getElementById('heroPhone').value.trim(), source:'hero'},
-    document.getElementById('heroPhoneMsg'), document.getElementById('heroPhoneSubmit'),
+    msgEl, document.getElementById('heroPhoneSubmit'),
     'Принято. Перезвоним в рабочее время 10:00-20:00.');
 });
 document.getElementById('finalForm').addEventListener('submit', function(e){
   e.preventDefault();
+  var msgEl = document.getElementById('finalMsg');
+  if(!document.getElementById('finalAgree').checked){
+    msgEl.style.color = '#B3402E'; msgEl.textContent = 'Нужно согласие на обработку данных, поставьте галочку.'; return;
+  }
   sendLead({phone:document.getElementById('fPhone').value.trim(), source:'final'},
-    document.getElementById('finalMsg'), this.querySelector('button[type="submit"]'),
+    msgEl, this.querySelector('button[type="submit"]'),
     'Принято. Перезвоним в рабочее время 10:00-20:00.');
 });
 </script>
