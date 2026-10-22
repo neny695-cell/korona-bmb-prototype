@@ -204,13 +204,13 @@ footer p{margin-bottom:8px;font-size:15px}
       </div>
     </div>
     <a class="hdr-phone" href="tel:+79033980560">+7 (903) 398-05-60</a>
-    <a class="btn fill" style="width:auto" href="https://max.ru/u/f9LHodD0cOJCXonOE7L-6d2Cn6Nf_J-C3UZZcRvgBYKgweEdzWz5XIKUxtk" target="_blank" rel="noopener">Написать в MAX</a>
   </div>
 </header>
 
 <!-- 1. Первый экран -->
 <section id="top">
   <div class="wrap hero-grid">
+    <div class="hero-img"><img src="img/IMG_9470.jpg" alt="Фирменный стенд Корона в ТЦ Большой мебельный базар" fetchpriority="high"></div>
     <div>
       <span class="hero-badge">КОРОНА · МЕБЕЛЬНАЯ ФАБРИКА</span>
       <h1>Матрас под рост и вес, цена сразу</h1>
@@ -226,14 +226,13 @@ footer p{margin-bottom:8px;font-size:15px}
       <div class="btn-col">
         <a class="btn fill" href="https://max.ru/u/f9LHodD0cOJCXonOE7L-6d2Cn6Nf_J-C3UZZcRvgBYKgweEdzWz5XIKUxtk" target="_blank" rel="noopener">Написать в MAX</a>
         <a class="btn" href="tel:+79033980560">Позвонить: +7 (903) 398-05-60</a>
-        <a class="btn ghost" href="https://wa.me/79033980560?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%BF%D0%BE%D0%B4%D0%BE%D0%B1%D1%80%D0%B0%D1%82%D1%8C%20%D0%BC%D0%B0%D1%82%D1%80%D0%B0%D1%81." target="_blank" rel="noopener">Написать в WhatsApp</a>
       </div>
+      <p class="small" style="margin-top:10px"><a href="https://wa.me/79033980560?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%BF%D0%BE%D0%B4%D0%BE%D0%B1%D1%80%D0%B0%D1%82%D1%8C%20%D0%BC%D0%B0%D1%82%D1%80%D0%B0%D1%81." target="_blank" rel="noopener" style="color:var(--purple)">Написать в WhatsApp</a></p>
       <p class="small" style="margin-top:18px"><strong style="color:var(--ink)">Проще телефон?</strong> Оставьте номер, перезвоним.</p>
       <div class="field"><input type="tel" id="heroPhone" inputmode="tel" placeholder="+7 ___ ___-__-__"></div>
       <button class="btn ghost" id="heroPhoneSubmit">Перезвоните мне</button>
       <p class="form-msg" id="heroPhoneMsg"></p>
     </div>
-    <div class="hero-img"><img src="img/IMG_9470.jpg" alt="Фирменный стенд Корона в ТЦ Большой мебельный базар" fetchpriority="high"></div>
   </div>
 </section>
 
@@ -285,7 +284,7 @@ footer p{margin-bottom:8px;font-size:15px}
       <div class="quiz-step" data-step="5">
         <h3>Готово. Ваши варианты:</h3>
         <div class="code-box"><span class="small">Ваш код подбора</span><br><b id="quizCode">...</b></div>
-        <p class="small">Назовёте код в чате или в зале: не нужно заново рассказывать про рост, вес и жёсткость, продавец сразу видит ваш подбор.</p>
+        <p class="small">Код уже внутри сообщения: нажимаете кнопку ниже, чат открывается с готовым текстом. Ничего копировать не нужно. В зале просто назовите код продавцу.</p>
         <div id="recoList" style="margin:14px 0"></div>
         <p style="margin:14px 0 6px"><strong>Что дальше:</strong></p>
         <ul class="next-list">
@@ -662,7 +661,19 @@ function renderFinal(){
     ', бюджет: ' + (quiz.answers.budget || 'нет ответа') +
     '. Хочу узнать наличие и цену.';
   document.getElementById('quizWaBtn').href = 'https://wa.me/79033980560?text=' + encodeURIComponent(text);
+  document.getElementById('quizMaxBtn').href = MAX_URL + '?text=' + encodeURIComponent(text);
 }
+
+/* Кнопки товаров: чат открывается с готовым сообщением про модель */
+document.querySelectorAll('.prod').forEach(function(card){
+  var t = card.querySelector('h3');
+  var p = card.querySelector('.price');
+  var a = card.querySelector('a.btn[href*="max.ru"]');
+  if(!t || !a) return;
+  var msg = 'Здравствуйте! Интересует ' + t.textContent.replace(/\s+/g,' ').trim() +
+    (p ? ' (' + p.textContent.trim() + ')' : '') + '. Есть в наличии?';
+  a.href = a.href.split('?')[0] + '?text=' + encodeURIComponent(msg);
+});
 (function(){
   var answered = 0;
   if(quiz.answers.who) answered = 1;
