@@ -19,52 +19,44 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Install FTP client
+      - name: Install SSH client tools
         run: |
           sudo apt-get update
-          sudo apt-get install -y lftp
+          sudo apt-get install -y sshpass
 
       - name: Upload site and team photos
         env:
-          FTP_HOST: ${{ secrets.FTP_HOST }}
-          FTP_USER: ${{ secrets.FTP_USER }}
-          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_USER: ${{ secrets.SSH_USER }}
+          SSH_PASSWORD: ${{ secrets.SSH_PASSWORD }}
+          SSH_PORT: ${{ secrets.SSH_PORT }}
         run: |
           set -euo pipefail
-          ftp_run() {
-            lftp -u "$FTP_USER,$FTP_PASSWORD" -e "
-              set cmd:fail-exit yes
-              set net:timeout 20
-              set net:max-retries 1
-              set ftp:ssl-allow yes
-              open ftp://$FTP_HOST
-              $1
-              bye
-            "
-          }
+          REMOTE="$SSH_USER@$SSH_HOST"
+          REMOTE_DIR='/var/www/korona'
+          SSH_OPTS=(-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ConnectTimeout=20 -o PreferredAuthentications=password -o PubkeyAuthentication=no -o NumberOfPasswordPrompts=1 -o LogLevel=VERBOSE)
 
-          REMOTE_DIR=''
-          for dir in '/data/www/sovetowww.fvds.ru' '/www/sovetowww.fvds.ru' '/sovetowww.fvds.ru' '/public_html' '/'; do
-            if ftp_run "cd $dir; cls index.html" >/tmp/korona-ftp-check.log 2>&1; then
-              REMOTE_DIR="$dir"
-              break
-            fi
-          done
-          if [ -z "$REMOTE_DIR" ]; then
-            cat /tmp/korona-ftp-check.log
-            echo 'Site document root not found'
-            exit 1
-          fi
-          echo 'Site document root found'
+          sshpass -p "$SSH_PASSWORD" ssh "${SSH_OPTS[@]}" -p "$SSH_PORT" "$REMOTE" "
+            set -e
+            test -f '$REMOTE_DIR/index.html'
+            mkdir -p /root/backups/korona '$REMOTE_DIR/img'
+            cp '$REMOTE_DIR/index.html' \"/root/backups/korona/index-\$(date +%Y%m%d%H%M%S).html\"
+          "
 
-          ftp_run "cd $REMOTE_DIR; get index.html -o /tmp/korona-index-backup.html"
-          ftp_run "cd $REMOTE_DIR; put v4/index.html -o index.html; mkdir -p img"
-          ftp_run "cd $REMOTE_DIR/img; put v4/img/team-zakhar.webp -o team-zakhar.webp; put v4/img/team-elena-generated.webp -o team-elena-generated.webp; put v4/img/team-nelya-generated.webp -o team-nelya-generated.webp"
+          sshpass -p "$SSH_PASSWORD" scp "${SSH_OPTS[@]}" -P "$SSH_PORT" \
+            v4/index.html \
+            "$REMOTE:$REMOTE_DIR/index.html"
+          sshpass -p "$SSH_PASSWORD" scp "${SSH_OPTS[@]}" -P "$SSH_PORT" \
+            v4/img/team-zakhar.webp \
+            v4/img/team-elena-generated.webp \
+            v4/img/team-nelya-generated.webp \
+            "$REMOTE:$REMOTE_DIR/img/"
 
       - name: Verify published page
         run: |
-          curl -fsSL --max-time 30 http://sovetowww.fvds.ru/ -o /tmp/korona-live.html
+          curl -fsSL --max-time 30 https://koronabmb.ru/ -o /tmp/korona-live.html
           grep -q '10 лет подбираем всё для безупречного сна' /tmp/korona-live.html
           grep -q 'https://t.me/koronabmb56' /tmp/korona-live.html
           grep -q 'team-zakhar.webp' /tmp/korona-live.html
+          curl -fsSL --max-time 30 -o /dev/null https://www.koronabmb.ru/
           echo 'Live site updated successfully'
