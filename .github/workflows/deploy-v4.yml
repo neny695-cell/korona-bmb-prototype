@@ -19,49 +19,47 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Install SSH client tools
+      - name: Install FTP client
         run: |
           sudo apt-get update
-          sudo apt-get install -y sshpass
+          sudo apt-get install -y lftp
 
       - name: Upload site and team photos
         env:
-          SSH_HOST: ${{ secrets.SSH_HOST }}
-          SSH_USER: ${{ secrets.SSH_USER }}
-          SSH_PASSWORD: ${{ secrets.SSH_PASSWORD }}
-          SSH_PORT: ${{ secrets.SSH_PORT }}
+          FTP_HOST: ${{ secrets.FTP_HOST }}
+          FTP_USER: ${{ secrets.FTP_USER }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
         run: |
           set -euo pipefail
-          export SSHPASS="$SSH_PASSWORD"
-          SSH_OPTS=(-o StrictHostKeyChecking=accept-new -o ConnectTimeout=20)
-          REMOTE="$SSH_USER@$SSH_HOST"
+          ftp_run() {
+            lftp -u "$FTP_USER,$FTP_PASSWORD" -e "
+              set cmd:fail-exit yes
+              set net:timeout 20
+              set net:max-retries 1
+              set ftp:ssl-allow yes
+              open ftp://$FTP_HOST
+              $1
+              bye
+            "
+          }
 
-          REMOTE_DIR=$(sshpass -e ssh "${SSH_OPTS[@]}" -p "$SSH_PORT" "$REMOTE" '
-            for dir in "/var/www/sovetowww/data/www/sovetowww.fvds.ru" "/home/sovetowww/data/www/sovetowww.fvds.ru" "$HOME/data/www/sovetowww.fvds.ru" "$HOME/www/sovetowww.fvds.ru" "/var/www/sovetowww.fvds.ru" "/var/www/html"; do
-              if [ -f "$dir/index.html" ]; then
-                printf "%s" "$dir"
-                exit 0
-              fi
-            done
-            echo "Site document root not found" >&2
+          REMOTE_DIR=''
+          for dir in '/data/www/sovetowww.fvds.ru' '/www/sovetowww.fvds.ru' '/sovetowww.fvds.ru' '/public_html' '/'; do
+            if ftp_run "cd $dir; cls index.html" >/tmp/korona-ftp-check.log 2>&1; then
+              REMOTE_DIR="$dir"
+              break
+            fi
+          done
+          if [ -z "$REMOTE_DIR" ]; then
+            cat /tmp/korona-ftp-check.log
+            echo 'Site document root not found'
             exit 1
-          ')
-          echo "Site document root found"
+          fi
+          echo 'Site document root found'
 
-          sshpass -e ssh "${SSH_OPTS[@]}" -p "$SSH_PORT" "$REMOTE" "
-            set -e
-            mkdir -p \"\$HOME/backups/korona\" \"$REMOTE_DIR/img\"
-            cp \"$REMOTE_DIR/index.html\" \"\$HOME/backups/korona/index-\$(date +%Y%m%d%H%M%S).html\"
-          "
-
-          sshpass -e scp "${SSH_OPTS[@]}" -P "$SSH_PORT" \
-            v4/index.html \
-            "$REMOTE:$REMOTE_DIR/index.html"
-          sshpass -e scp "${SSH_OPTS[@]}" -P "$SSH_PORT" \
-            v4/img/team-zakhar.webp \
-            v4/img/team-elena-generated.webp \
-            v4/img/team-nelya-generated.webp \
-            "$REMOTE:$REMOTE_DIR/img/"
+          ftp_run "cd $REMOTE_DIR; get index.html -o /tmp/korona-index-backup.html"
+          ftp_run "cd $REMOTE_DIR; put v4/index.html -o index.html; mkdir -p img"
+          ftp_run "cd $REMOTE_DIR/img; put v4/img/team-zakhar.webp -o team-zakhar.webp; put v4/img/team-elena-generated.webp -o team-elena-generated.webp; put v4/img/team-nelya-generated.webp -o team-nelya-generated.webp"
 
       - name: Verify published page
         run: |
