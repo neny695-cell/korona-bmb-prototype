@@ -37,7 +37,7 @@ jobs:
           REMOTE="$SSH_USER@$SSH_HOST"
 
           REMOTE_DIR=$(sshpass -e ssh "${SSH_OPTS[@]}" -p "$SSH_PORT" "$REMOTE" '
-            for dir in "$HOME/data/www/sovetowww.fvds.ru" "$HOME/www/sovetowww.fvds.ru" "/var/www/sovetowww.fvds.ru"; do
+            for dir in "/var/www/sovetowww/data/www/sovetowww.fvds.ru" "/home/sovetowww/data/www/sovetowww.fvds.ru" "$HOME/data/www/sovetowww.fvds.ru" "$HOME/www/sovetowww.fvds.ru" "/var/www/sovetowww.fvds.ru" "/var/www/html"; do
               if [ -f "$dir/index.html" ]; then
                 printf "%s" "$dir"
                 exit 0
